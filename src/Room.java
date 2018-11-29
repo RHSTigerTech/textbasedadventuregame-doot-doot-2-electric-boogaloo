@@ -1,5 +1,5 @@
 public class Room extends NamedThing {
     public Room(){
-        super();
+        super("Room", "A location the player can step into.");
     }
 }

@@ -1,2 +1,2 @@
-public class Weapon extends Obtainable{
+public class Weapon extends Items {
 }
