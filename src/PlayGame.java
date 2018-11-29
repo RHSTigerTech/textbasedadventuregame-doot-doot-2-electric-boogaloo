@@ -1,7 +1,7 @@
 public class PlayGame {
     public static void main(String [] args){
-        NamedThing[][] ground = new NamedThing[2][3];
-        NamedThing[][] cabin = new NamedThing[3][3];
+        Room[][] ground = new Room[2][3];
+        Room[][] cabin = new Room[3][3];
 
         boolean winCon = false;
 
