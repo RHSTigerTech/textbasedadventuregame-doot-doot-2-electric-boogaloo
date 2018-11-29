@@ -1,5 +1,5 @@
 public class PlayGame {
-    public static void main(String [] args){
+    public static void main(String [] args) {
         Room[][] ground = new Room[2][3];
         Room[][] cabin = new Room[3][3];
 
