@@ -1,2 +1,2 @@
-public class player extends namedThing {
+public class Player extends NamedThing {
 }

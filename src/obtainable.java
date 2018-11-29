@@ -1,2 +1,2 @@
-public class obtainable extends namedThing {
+public class Obtainable extends NamedThing {
 }

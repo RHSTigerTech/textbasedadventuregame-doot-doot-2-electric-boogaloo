@@ -1,7 +1,7 @@
-public class playGame {
+public class PlayGame {
     public static void main(String [] args){
-        namedThing[][] ground = new namedThing[2][3];
-        namedThing[][] cabin = new namedThing[3][3];
+        NamedThing[][] ground = new NamedThing[2][3];
+        NamedThing[][] cabin = new NamedThing[3][3];
 
         boolean winCon = false;
 

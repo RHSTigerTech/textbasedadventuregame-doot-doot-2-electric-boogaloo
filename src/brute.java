@@ -1,2 +1,2 @@
-public class brute extends enemy {
+public class Brute extends Enemy {
 }

@@ -1,2 +1,2 @@
-public class skeleton extends enemy {
+public class Skeleton extends Enemy {
 }

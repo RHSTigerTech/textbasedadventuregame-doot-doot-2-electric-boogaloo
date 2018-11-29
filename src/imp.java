@@ -1,2 +1,2 @@
-public class imp extends enemy {
+public class Imp extends Enemy {
 }

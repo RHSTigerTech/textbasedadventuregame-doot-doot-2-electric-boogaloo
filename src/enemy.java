@@ -1,2 +1,2 @@
-public class enemy extends interactable {
+public class Enemy extends Interactable {
 }

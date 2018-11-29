@@ -1,2 +1,2 @@
-public class knight extends enemy {
+public class Knight extends Enemy {
 }

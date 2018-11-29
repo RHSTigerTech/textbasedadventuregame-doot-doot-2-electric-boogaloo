@@ -1,8 +1,8 @@
-public class namedThing {
+public class NamedThing {
     private String name;
     private String description;
 
-    public namedThing(){
+    public NamedThing(){
         name = "generic item";
         description = "a generic item";
     }

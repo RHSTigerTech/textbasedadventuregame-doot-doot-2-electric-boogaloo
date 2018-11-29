@@ -1,2 +1,2 @@
-public class interactable extends namedThing {
+public class Interactable extends NamedThing {
 }
