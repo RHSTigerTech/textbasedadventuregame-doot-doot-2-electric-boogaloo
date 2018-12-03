@@ -4,16 +4,15 @@ public class PlayGame {
     public static void main(String[] args) {
         Room[][] ground = new Room[2][3];
         Room[][] cabin = new Room[3][3];
+        ground[0][0] = new Room("Lobby", "This is where you came from.");
 
         boolean winCon = false;
 
         while (!winCon) {
-
             System.out.println("You are in a spaceship. " +
                     "Your only chance at escaping is to dock onto a nearby ship that responded to your SOS." +
                     " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship. Use /help for a list of commands");
             command();
-
 
             winCon = true;
         }
@@ -31,6 +30,18 @@ public class PlayGame {
                     "\n/look: provides a description of your current room" +
                     "\n/pickup: prompts you if you would like to pickup any nearby objects" +
                     "\n/activate: prompts you if you would like to activate any nearby objects");
+        }
+
+        if (answer.equalsIgnoreCase("/look")) {
+
+        }
+
+        if (answer.equalsIgnoreCase("/pickup")) {
+
+        }
+
+        if (answer.equalsIgnoreCase("/activate")) {
+
         }
     }
 }
