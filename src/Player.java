@@ -1,18 +1,38 @@
 public class Player extends LivingThing {
     private Items[] inventory;
 
+    /**
+     * Main constructor of Player.
+     * @param name Name of the player.
+     * @param description Description of the player.
+     * @param health Health points
+     * @param strength Attack power
+     * @param defense Ability to resist attacks
+     */
     public Player(String name, String description, int health, int strength, int defense) {
         super(name, description, health, strength, defense);
     }
 
+    /**
+     * Getter method for the inventory list
+     * @return The current inventory array
+     */
     public Items[] getInventory() {
         return inventory;
     }
 
+    /**
+     * Setter method for the inventory list
+     * @param inventory The current inventory array
+     */
     public void setInventory(Items[] inventory) {
         this.inventory = inventory;
     }
 
+    /**
+     * toString() method for Player
+     * @return A formatted string of Player's properties.
+     */
     @Override
     public String toString() {
         return "Health: " + getHealth() +

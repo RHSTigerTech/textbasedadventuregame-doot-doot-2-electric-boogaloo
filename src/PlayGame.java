@@ -1,6 +1,11 @@
 import java.util.Scanner;
 
 public class PlayGame {
+
+    /**
+     * Main method of the package
+     * @param args This param that every main method has
+     */
     public static void main(String[] args) {
         Room[][] ground = new Room[2][3];
         Room[][] cabin = new Room[3][3];
@@ -19,7 +24,9 @@ public class PlayGame {
         System.out.println("You win!");
     }
 
-
+    /**
+     * Command method for the user input
+     */
     public static void command() {
         Scanner input = new Scanner(System.in);
         String answer = input.nextLine();
