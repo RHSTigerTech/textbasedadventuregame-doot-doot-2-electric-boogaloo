@@ -1,5 +1,7 @@
 public class Player extends LivingThing {
     private Items[] inventory;
+    private int roomRow;
+    private int roomColumn;
 
     /**
      * Main constructor of Player.
@@ -11,6 +13,8 @@ public class Player extends LivingThing {
      */
     public Player(String name, String description, int health, int strength, int defense) {
         super(name, description, health, strength, defense);
+        roomRow = 0;
+        roomColumn = 1;
     }
 
     /**
@@ -38,10 +42,26 @@ public class Player extends LivingThing {
         return "Health: " + getHealth() +
                 "\nStrength: " + getStrength() +
                 "\nDefense: " + getDefense() +
-                "\nINVENTORY 1" + inventory[0] +
-                "\nINVENTORY 2" + inventory[1] +
-                "\nINVENTORY 3" + inventory[2] +
-                "\nINVENTORY 4" + inventory[3] +
-                "\nINVENTORY 5" + inventory[4];
+                "\nINVENTORY 1: " + inventory[0] +
+                "\nINVENTORY 2: " + inventory[1] +
+                "\nINVENTORY 3: " + inventory[2] +
+                "\nINVENTORY 4: " + inventory[3] +
+                "\nINVENTORY 5: " + inventory[4];
+    }
+
+    public int getRoomRow() {
+        return roomRow;
+    }
+
+    public int getRoomColumn() {
+        return roomColumn;
+    }
+
+    public void setRoomRow(int roomRow) {
+        this.roomRow = roomRow;
+    }
+
+    public void setRoomColumn(int roomColumn) {
+        this.roomColumn = roomColumn;
     }
 }

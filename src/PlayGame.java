@@ -7,9 +7,21 @@ public class PlayGame {
      * @param args This param that every main method has
      */
     public static void main(String[] args) {
+
+        Scanner console = new Scanner(System.in);
+        System.out.println("What is your name? ");
+        String answer = console.nextLine();
+        Player player1 = new Player(answer, "Player",10,5,5);
+
         Room[][] ground = new Room[2][3];
         Room[][] cabin = new Room[3][3];
-        ground[0][0] = new Room("Lobby", "This is where you came from.");
+
+
+        ground[0][0] = new Room("Old Quarters", "What once was your living quarters is now a trashed and broken room with claw marks on your bed and wall. There " +
+                "\nappears to be a loose board on the wall.");
+        ground[0][1] = new Room("Airlock Room", "You are in a small room with an airlock however a key " +
+                "\ncomponet seems to be missing from the activation panel. It looks as if a small creature must have" +
+                "\n fiddled with it.");
 
         boolean winCon = false;
 
@@ -40,6 +52,7 @@ public class PlayGame {
         }
 
         if (answer.equalsIgnoreCase("/look")) {
+            Room[]
 
         }
 
