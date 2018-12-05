@@ -52,7 +52,7 @@ public class PlayGame {
         }
 
         if (answer.equalsIgnoreCase("/look")) {
-            Room[]
+            Room[player1.getRoomRow()][getRoomcolumn()].getDescription;
 
         }
 
