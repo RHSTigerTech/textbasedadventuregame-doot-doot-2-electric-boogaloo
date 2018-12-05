@@ -24,14 +24,15 @@ public class PlayGame {
                 "\n fiddled with it.");
 
         boolean winCon = false;
+        System.out.println("You are in a spaceship. " +
+                "Your only chance at escaping is to dock onto a nearby ship that responded to your SOS." +
+                " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship. Use /help for a list of commands");
 
         while (!winCon) {
-            System.out.println("You are in a spaceship. " +
-                    "Your only chance at escaping is to dock onto a nearby ship that responded to your SOS." +
-                    " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship. Use /help for a list of commands");
-            command();
 
-            winCon = true;
+            command(ground,cabin,player1);
+
+            //winCon = true;
         }
         System.out.println("You win!");
     }
@@ -39,7 +40,7 @@ public class PlayGame {
     /**
      * Command method for the user input
      */
-    public static void command() {
+    public static void command(Room[][] ground, Room[][] cabin, Player player1) {
         Scanner input = new Scanner(System.in);
         String answer = input.nextLine();
         if (answer.equalsIgnoreCase("/help")) {
@@ -52,7 +53,8 @@ public class PlayGame {
         }
 
         if (answer.equalsIgnoreCase("/look")) {
-            Room[player1.getRoomRow()][getRoomcolumn()].getDescription;
+            System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getName());
+            System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getDescription());
 
         }
 
@@ -61,6 +63,23 @@ public class PlayGame {
         }
 
         if (answer.equalsIgnoreCase("/activate")) {
+
+        }
+
+        if (answer.equalsIgnoreCase("/move west")){
+            player1.setRoomColumn(player1.getRoomColumn()-1);
+        }
+
+        if (answer.equalsIgnoreCase("/move east")){
+            player1.setRoomColumn(player1.getRoomColumn()+1);
+
+        }
+        if (answer.equalsIgnoreCase("/move north")){
+            player1.setRoomRow(player1.getRoomRow()+1);
+
+        }
+        if (answer.equalsIgnoreCase("/move south")){
+            player1.setRoomRow(player1.getRoomRow()-1);
 
         }
     }
