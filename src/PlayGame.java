@@ -21,7 +21,13 @@ public class PlayGame {
                 "\nappears to be a loose board on the wall.");
         ground[0][1] = new Room("Airlock Room", "You are in a small room with an airlock however a key " +
                 "\ncomponet seems to be missing from the activation panel. It looks as if a small creature must have" +
-                "\n fiddled with it.");
+                "\nfiddled with it.");
+        ground[0][2] = new Room("Control Room", "There is a screwdriver lying around in the corner and a lever that has been" +
+                "\nhastily boarded up with spare planks and panels.");
+        ground[1][0] = new Room("Cabin Entrance","A shut trap door lays at your feet. You can't seem to open it.");
+        ground[1][1] = new Room("The Bridge", "A large gap where a the ships bridgeway remains");
+        ground[1][2] = new Room();
+
 
         boolean winCon = false;
         System.out.println("You are in a spaceship. " +
