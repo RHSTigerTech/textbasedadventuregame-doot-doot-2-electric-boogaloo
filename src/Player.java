@@ -49,18 +49,34 @@ public class Player extends LivingThing {
                 "\nINVENTORY 5: " + inventory[4];
     }
 
+    /**
+     * Getter method for roomRow
+     * @return The current roomRow
+     */
     public int getRoomRow() {
         return roomRow;
     }
 
+    /**
+     * Getter method for roomColumn
+     * @return The current roomColumn
+     */
     public int getRoomColumn() {
         return roomColumn;
     }
 
+    /**
+     * Setter method for roomRow
+     * @param roomRow The new roomRow of the player
+     */
     public void setRoomRow(int roomRow) {
         this.roomRow = roomRow;
     }
 
+    /**
+     * Setter method for roomColumn
+     * @param roomColumn The new roomColumn of the player
+     */
     public void setRoomColumn(int roomColumn) {
         this.roomColumn = roomColumn;
     }
