@@ -25,8 +25,9 @@ public class PlayGame {
         ground[0][2] = new Room("Control Room", "There is a screwdriver lying around in the corner and a lever that has been" +
                 "\nhastily boarded up with spare planks and panels.");
         ground[1][0] = new Room("Cabin Entrance","A shut trap door lays at your feet. You can't seem to open it.");
-        ground[1][1] = new Room("The Bridge", "A large gap where a the ships bridgeway remains");
-        ground[1][2] = new Room();
+        ground[1][1] = new Room("The Bridge", "A large gap stands in your way. You could have sworn there WAS a bridge here.");
+        ground[1][2] = new Room("Maintenance Closet", "A ravaged room where the crew's supplies used to be." +
+                "\nSupposedly the imps never deemed the spare crowbar important.");
 
 
         boolean winCon = false;
@@ -52,41 +53,89 @@ public class PlayGame {
         if (answer.equalsIgnoreCase("/help")) {
             System.out.println("\nCommands:" +
                     "\n/help: displays a list of commands" +
-                    "\n/move (WEST,NORTH,EAST,SOUTH): move in a direction" +
+                    "\n/move (NORTH,EAST,SOUTH,WEST): move in a direction" +
                     "\n/look: provides a description of your current room" +
                     "\n/pickup: prompts you if you would like to pickup any nearby objects" +
                     "\n/activate: prompts you if you would like to activate any nearby objects");
         }
 
-        if (answer.equalsIgnoreCase("/look")) {
+        else if (answer.equalsIgnoreCase("/look")) {
             System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getName());
             System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getDescription());
-
+            System.out.println();
+            printGroundMap(player1);
         }
 
-        if (answer.equalsIgnoreCase("/pickup")) {
-
+        else if (answer.equalsIgnoreCase("/pickup")) {
+            System.out.println("Test");
         }
 
-        if (answer.equalsIgnoreCase("/activate")) {
-
+        else if (answer.equalsIgnoreCase("/activate")) {
+            System.out.println("Test");
         }
 
-        if (answer.equalsIgnoreCase("/move west")){
+        else if (answer.equalsIgnoreCase("/move west")){
             player1.setRoomColumn(player1.getRoomColumn()-1);
+            printGroundMap(player1);
         }
 
-        if (answer.equalsIgnoreCase("/move east")){
+        else if (answer.equalsIgnoreCase("/move east")){
             player1.setRoomColumn(player1.getRoomColumn()+1);
-
+            printGroundMap(player1);
         }
-        if (answer.equalsIgnoreCase("/move north")){
-            player1.setRoomRow(player1.getRoomRow()+1);
-
-        }
-        if (answer.equalsIgnoreCase("/move south")){
+        else if (answer.equalsIgnoreCase("/move north")){
             player1.setRoomRow(player1.getRoomRow()-1);
-
+            printGroundMap(player1);
+        }
+        else if (answer.equalsIgnoreCase("/move south")){
+            player1.setRoomRow(player1.getRoomRow()+1);
+            printGroundMap(player1);
+        }
+        else if (answer.equalsIgnoreCase("/escape")){
+            System.out.println("Try again wise guy.");
+        }
+        else{
+            System.out.println("Oak's words echoed... There's a time and place for everything, but not now." +
+                    "\nThis is strange because you don't know a professor oak but his warning probably means something important anyway.");
         }
     }
+
+    public static void printGroundMap(Player player1){
+
+        String a = " ";
+        String b = " ";
+        String c = " ";
+        String d = " ";
+        String e = " ";
+        String f = " ";
+
+
+        if (player1.getRoomRow()==0 && player1.getRoomColumn()==0){
+            a="@";
+        }
+        else if (player1.getRoomRow()==0 && player1.getRoomColumn()==1){
+            b="@";
+        }
+        else if (player1.getRoomRow()==0 && player1.getRoomColumn()==2){
+            c="@";
+        }
+        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==0){
+            d="@";
+        }
+        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==1){
+            e="@";
+        }
+        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==2){
+            f="@";
+        }
+
+
+        System.out.println(
+                "-------------" +
+                "\n| "+a+" | "+b+" | "+c+" |" +
+                "\n-----xxx-xxx-" +
+                "\n| "+d+" | "+e+" | "+f+" |" +
+                "\n-------------");
+    }
+
 }
