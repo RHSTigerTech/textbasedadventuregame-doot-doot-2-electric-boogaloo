@@ -5,6 +5,6 @@ public class Weapon extends Items {
      * @param location Where the weapon currently is on the map.
      */
     public Weapon(Room location){
-        super("Generic","Generic", location);
+        super("Generic","Generic");
     }
 }

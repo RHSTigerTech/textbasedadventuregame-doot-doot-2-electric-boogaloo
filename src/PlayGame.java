@@ -18,16 +18,16 @@ public class PlayGame {
 
 
         ground[0][0] = new Room("Old Quarters", "What once was your living quarters is now a trashed and broken room with claw marks on your bed and wall. There " +
-                "\nappears to be a loose board on the wall.");
+                "\nappears to be a loose board on the wall.", true, false,false,true);
         ground[0][1] = new Room("Airlock Room", "You are in a small room with an airlock however a key " +
                 "\ncomponet seems to be missing from the activation panel. It looks as if a small creature must have" +
-                "\nfiddled with it.");
+                "\nfiddled with it.",true,false,true,false);
         ground[0][2] = new Room("Control Room", "There is a screwdriver lying around in the corner and a lever that has been" +
-                "\nhastily boarded up with spare planks and panels.");
-        ground[1][0] = new Room("Cabin Entrance","A shut trap door lays at your feet. You can't seem to open it.");
-        ground[1][1] = new Room("The Bridge", "A large gap stands in your way. You could have sworn there WAS a bridge here.");
+                "\nhastily boarded up with spare planks and panels.",true,true,true,false);
+        ground[1][0] = new Room("Cabin Entrance","A shut trap door lays at your feet. You can't seem to open it.",false,false,true,true);
+        ground[1][1] = new Room("The Bridge", "A large gap stands in your way. You could have sworn there WAS a bridge here.",true,false,true,false);
         ground[1][2] = new Room("Maintenance Closet", "A ravaged room where the crew's supplies used to be." +
-                "\nSupposedly the imps never deemed the spare crowbar important.");
+                "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false);
 
 
         boolean winCon = false;
@@ -67,7 +67,7 @@ public class PlayGame {
         }
 
         else if (answer.equalsIgnoreCase("/pickup")) {
-            System.out.println("Test");
+            System.out.println(player1);
         }
 
         else if (answer.equalsIgnoreCase("/activate")) {
@@ -75,28 +75,44 @@ public class PlayGame {
         }
 
         else if (answer.equalsIgnoreCase("/move west")){
-            player1.setRoomColumn(player1.getRoomColumn()-1);
-            printGroundMap(player1);
+            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionWest())
+                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+            else {
+                player1.setRoomColumn(player1.getRoomColumn() - 1);
+                printGroundMap(player1);
+            }
         }
 
         else if (answer.equalsIgnoreCase("/move east")){
-            player1.setRoomColumn(player1.getRoomColumn()+1);
-            printGroundMap(player1);
+            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionEast())
+                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+            else {
+                player1.setRoomColumn(player1.getRoomColumn() + 1);
+                printGroundMap(player1);
+            }
         }
         else if (answer.equalsIgnoreCase("/move north")){
-            player1.setRoomRow(player1.getRoomRow()-1);
-            printGroundMap(player1);
+            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionNorth())
+                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+            else {
+                player1.setRoomRow(player1.getRoomRow() - 1);
+                printGroundMap(player1);
+            }
         }
         else if (answer.equalsIgnoreCase("/move south")){
-            player1.setRoomRow(player1.getRoomRow()+1);
-            printGroundMap(player1);
+            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionSouth())
+                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+            else {
+                player1.setRoomRow(player1.getRoomRow() + 1);
+                printGroundMap(player1);
+            }
         }
         else if (answer.equalsIgnoreCase("/escape")){
             System.out.println("Try again wise guy.");
         }
         else{
             System.out.println("Oak's words echoed... There's a time and place for everything, but not now." +
-                    "\nThis is strange because you don't know a professor oak but his warning probably means something important anyway.");
+                    "\nThis is strange because you don't know a Professor Oak but his warning probably means something important anyway.");
         }
     }
 

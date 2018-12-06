@@ -15,6 +15,12 @@ public class Player extends LivingThing {
         super(name, description, health, strength, defense);
         roomRow = 0;
         roomColumn = 1;
+        inventory = new Items[5];
+        inventory[0] = new Items("NOTHING", "STILL NOTHING");
+        inventory[1] = new Items("NOTHING", "STILL NOTHING");
+        inventory[2] = new Items("NOTHING", "STILL NOTHING");
+        inventory[3] = new Items("NOTHING", "STILL NOTHING");
+        inventory[4] = new Items("NOTHING", "STILL NOTHING");
     }
 
     /**
@@ -27,10 +33,14 @@ public class Player extends LivingThing {
 
     /**
      * Setter method for the inventory list
-     * @param inventory The current inventory array
+     * @param item The current inventory array
      */
-    public void setInventory(Items[] inventory) {
-        this.inventory = inventory;
+    public void setInventory(Items item) {
+        for (int i = 0; i < 5; i++){
+            if (item.getName().equals("NOTHING"))
+                inventory[i] = item;
+        }
+
     }
 
     /**
@@ -39,9 +49,9 @@ public class Player extends LivingThing {
      */
     @Override
     public String toString() {
-        return "Health: " + getHealth() +
-                "\nStrength: " + getStrength() +
-                "\nDefense: " + getDefense() +
+        return "Health: " + super.getHealth() +
+                "\nStrength: " + super.getStrength() +
+                "\nDefense: " + super.getDefense() +
                 "\nINVENTORY 1: " + inventory[0] +
                 "\nINVENTORY 2: " + inventory[1] +
                 "\nINVENTORY 3: " + inventory[2] +
@@ -80,4 +90,6 @@ public class Player extends LivingThing {
     public void setRoomColumn(int roomColumn) {
         this.roomColumn = roomColumn;
     }
+
+
 }
