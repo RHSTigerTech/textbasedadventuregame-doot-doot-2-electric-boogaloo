@@ -7,15 +7,12 @@ public class PlayGame {
      * @param args This param that every main method has
      */
     public static void main(String[] args) {
-
-        Scanner console = new Scanner(System.in);
-        System.out.println("What is your name? ");
-        String answer = console.nextLine();
-        Player player1 = new Player(answer, "Player",10,5,5);
+        Items screwdriver = new Items("Screwdriver", "An old screwdriver. It might be useful");
+        Items plank = new Items("An Old Plank", "Looks sturdy enough... maybe?");
+        Items crowbar = new Items("Rusty Crowbar", "Could be useful.. or harmful.");
 
         Room[][] ground = new Room[2][3];
         Room[][] cabin = new Room[3][3];
-
 
         ground[0][0] = new Room("Old Quarters", "What once was your living quarters is now a trashed and broken room with claw marks on your bed and wall. There " +
                 "\nappears to be a loose board on the wall.", true, false,false,true);
@@ -29,11 +26,33 @@ public class PlayGame {
         ground[1][2] = new Room("Maintenance Closet", "A ravaged room where the crew's supplies used to be." +
                 "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false);
 
+        cabin[0][0] = new Room("Trapdoor entrance","A ladder leads back up to the GROUND floor..." +
+                "\nWhy would they call the floor above the CABIN the GROUND floor?");
+        cabin[0][1] = new Room("Security Panel","STATUS: LOCKED. PLEASE ENTER 5 DIGIT CODE.");
+        cabin[0][2] = new Room("Right Statue Hall","An adjustable statue stands in your way.");
+        cabin[1][0] = new Room("Research lab","A lot of strewn notes and novels lay on the floor. \"Space Travel for DUMMIES\", " +
+                "\n\"Tips and Tricks for Avoiding Space Imps\", and a torn piece of paper labelled \"Password Reminder\": Does anyone want" +
+                "\na piece of pie?");
+        cabin[1][1] = new Room("Janitor Closet","A lone can of boring \"ANTI-SKELE SPRAY\" lays at your feet. Its" +
+                "\nmonochrome color could lull any imp to sleep. You almost don't want to take it.");
+        cabin[1][2] = new Room("Bathroom","Feces is on the wall, oil on the floor, and your key is in the toilet. You've spent" +
+                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.");
+        cabin[2][0] = new Room("Left Statue Hall","An adjustable statue stands in your way.");
+        cabin[2][1] = new Room("Manor Hall","Up on the diner table lays a message. \nIN ORDER FOR YOU TO SOLVE THE RIDDLE OF THE TWO STATUES" +
+                "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.");
+        cabin[2][2] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.");
+
+
+        Scanner console = new Scanner(System.in);
+        System.out.println("What is your name? ");
+        String answer = console.nextLine();
+        Player player1 = new Player(answer, "Player",10,5,5);
+
 
         boolean winCon = false;
         System.out.println("You are in a spaceship. " +
                 "Your only chance at escaping is to dock onto a nearby ship that responded to your SOS." +
-                " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship. Use /help for a list of commands");
+                " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship.| Use /help for a list of commands");
 
         while (!winCon) {
 
