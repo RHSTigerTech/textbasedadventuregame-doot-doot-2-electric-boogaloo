@@ -46,7 +46,7 @@ public class PlayGame {
         Scanner console = new Scanner(System.in);
         System.out.println("What is your name? ");
         String answer = console.nextLine();
-        Player player1 = new Player(answer, "Player",10,5,5);
+        Player player1 = new Player(answer, "Player",11,5,5);
 
 
         boolean winCon = false;
