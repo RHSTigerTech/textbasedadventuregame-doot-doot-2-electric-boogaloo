@@ -27,20 +27,20 @@ public class PlayGame {
                 "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false);
 
         cabin[0][0] = new Room("Trapdoor entrance","A ladder leads back up to the GROUND floor..." +
-                "\nWhy would they call the floor above the CABIN the GROUND floor?");
-        cabin[0][1] = new Room("Security Panel","STATUS: LOCKED. PLEASE ENTER 5 DIGIT CODE.");
-        cabin[0][2] = new Room("Right Statue Hall","An adjustable statue stands in your way.");
+                "\nWhy would they call the floor above the CABIN the GROUND floor?",true,false,false,true);
+        cabin[0][1] = new Room("Security Panel","STATUS: LOCKED. PLEASE ENTER 5 DIGIT CODE.",true,false,false,false);
+        cabin[0][2] = new Room("Right Statue Hall","An adjustable statue stands in your way.",true,true,true,false);
         cabin[1][0] = new Room("Research lab","A lot of strewn notes and novels lay on the floor. \"Space Travel for DUMMIES\", " +
                 "\n\"Tips and Tricks for Avoiding Space Imps\", and a torn piece of paper labelled \"Password Reminder\": Does anyone want" +
-                "\na piece of pie?");
+                "\na piece of pie?",false,false,false,true);
         cabin[1][1] = new Room("Janitor Closet","A lone can of boring \"ANTI-SKELE SPRAY\" lays at your feet. Its" +
-                "\nmonochrome color could lull any imp to sleep. You almost don't want to take it.");
+                "\nmonochrome color could lull any imp to sleep. You almost don't want to take it.",false,true,false,true);
         cabin[1][2] = new Room("Bathroom","Feces is on the wall, oil on the floor, and your key is in the toilet. You've spent" +
-                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.");
-        cabin[2][0] = new Room("Left Statue Hall","An adjustable statue stands in your way.");
+                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.",true,true,false,true);
+        cabin[2][0] = new Room("Left Statue Hall","An adjustable statue stands in your way.",false,false,true,true);
         cabin[2][1] = new Room("Manor Hall","Up on the diner table lays a message. \nIN ORDER FOR YOU TO SOLVE THE RIDDLE OF THE TWO STATUES" +
-                "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.");
-        cabin[2][2] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.");
+                "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.",false,false,true,false);
+        cabin[2][2] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.",false,true,true,false);
 
 
         Scanner console = new Scanner(System.in);
@@ -79,10 +79,18 @@ public class PlayGame {
         }
 
         else if (answer.equalsIgnoreCase("/look")) {
-            System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getName());
-            System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getDescription());
-            System.out.println();
-            printGroundMap(player1);
+            if (player1.getFloor()==0) {
+                System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getName());
+                System.out.println(ground[player1.getRoomRow()][player1.getRoomColumn()].getDescription());
+                System.out.println();
+                printGroundMap(player1);
+            }
+            else {
+                System.out.println(cabin[player1.getRoomRow()][player1.getRoomColumn()].getName());
+                System.out.println(cabin[player1.getRoomRow()][player1.getRoomColumn()].getDescription());
+                System.out.println();
+                printCabinMap(player1);
+            }
         }
 
         else if (answer.equalsIgnoreCase("/pickup")) {
@@ -94,36 +102,74 @@ public class PlayGame {
         }
 
         else if (answer.equalsIgnoreCase("/move west")){
-            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionWest())
-                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
-            else {
-                player1.setRoomColumn(player1.getRoomColumn() - 1);
-                printGroundMap(player1);
+            if (player1.getFloor()==0){
+                if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionWest())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomColumn(player1.getRoomColumn() - 1);
+                    printGroundMap(player1);
+                }
+            }
+            else if(player1.getFloor()==1) {
+                if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionWest())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomColumn(player1.getRoomColumn() - 1);
+                    printCabinMap(player1);
+                }
             }
         }
 
         else if (answer.equalsIgnoreCase("/move east")){
-            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionEast())
-                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+            if (player1.getFloor()==0) {
+                if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionEast())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomColumn(player1.getRoomColumn() + 1);
+                    printGroundMap(player1);
+                }
+            }
             else {
-                player1.setRoomColumn(player1.getRoomColumn() + 1);
-                printGroundMap(player1);
+                if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionEast())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomColumn(player1.getRoomColumn() + 1);
+                    printCabinMap(player1);
+                }
             }
         }
         else if (answer.equalsIgnoreCase("/move north")){
-            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionNorth())
-                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+            if (player1.getFloor()==0) {
+                if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionNorth())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomRow(player1.getRoomRow() - 1);
+                    printGroundMap(player1);
+                }
+            }
             else {
-                player1.setRoomRow(player1.getRoomRow() - 1);
-                printGroundMap(player1);
+                if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionNorth())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomRow(player1.getRoomRow() - 1);
+                    printCabinMap(player1);
+                }
             }
         }
         else if (answer.equalsIgnoreCase("/move south")){
-            if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionSouth())
+            if (player1.getFloor()==0) {
+                if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionSouth())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomRow(player1.getRoomRow() + 1);
+                    printGroundMap(player1);
+                }
+            }
+            if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionSouth())
                 System.out.println("You try to get through the solid wall but alas... you fail miserably.");
             else {
                 player1.setRoomRow(player1.getRoomRow() + 1);
-                printGroundMap(player1);
+                printCabinMap(player1);
             }
         }
         else if (answer.equalsIgnoreCase("/escape")){
@@ -171,6 +217,59 @@ public class PlayGame {
                 "\n-----xxx-xxx-" +
                 "\n| "+d+" | "+e+" | "+f+" |" +
                 "\n-------------");
+    }
+
+    public static void printCabinMap(Player player1){
+
+        String a = " ";
+        String b = " ";
+        String c = " ";
+        String d = " ";
+        String e = " ";
+        String f = " ";
+        String g = " ";
+        String h = " ";
+        String i = " ";
+
+
+        if (player1.getRoomRow()==0 && player1.getRoomColumn()==0){
+            a="@";
+        }
+        else if (player1.getRoomRow()==0 && player1.getRoomColumn()==1){
+            b="@";
+        }
+        else if (player1.getRoomRow()==0 && player1.getRoomColumn()==2){
+            c="@";
+        }
+        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==0){
+            d="@";
+        }
+        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==1){
+            e="@";
+        }
+        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==2){
+            f="@";
+        }
+        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==0){
+            g="@";
+        }
+        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==1){
+            h="@";
+        }
+        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==2){
+            i="@";
+        }
+
+
+
+        System.out.println(
+                "-------------" +
+                        "\n| "+a+" | "+b+" | "+c+" |" +
+                        "\n---------xxx-" +
+                        "\n| "+d+" | "+e+" X "+f+" |" +
+                        "\n-------------" +
+                        "\n| "+g+" | "+h+" | "+i+" |" +
+                        "\n-------------");
     }
 
 }

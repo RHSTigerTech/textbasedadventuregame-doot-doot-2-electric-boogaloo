@@ -2,6 +2,7 @@ public class Player extends LivingThing {
     private Items[] inventory;
     private int roomRow;
     private int roomColumn;
+    private int floor;
 
     /**
      * Main constructor of Player.
@@ -15,6 +16,7 @@ public class Player extends LivingThing {
         super(name, description, health, strength, defense);
         roomRow = 0;
         roomColumn = 1;
+        floor = 1;
         inventory = new Items[5];
         inventory[0] = new Items("NOTHING", "STILL NOTHING");
         inventory[1] = new Items("NOTHING", "STILL NOTHING");
@@ -91,5 +93,11 @@ public class Player extends LivingThing {
         this.roomColumn = roomColumn;
     }
 
+    public int getFloor() {
+        return floor;
+    }
 
+    public void setFloor(int floor) {
+        this.floor = floor;
+    }
 }
