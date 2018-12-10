@@ -9,12 +9,13 @@ public class Room extends NamedThing {
     private boolean restrictionEast;
     private boolean restrictionSouth;
     private boolean restrictionWest;
+    private String activatableDescription;
 
     public Room(String name, String description) {
         super(name, description);
     }
 
-    public Room(String name, String description, boolean restrictionNorth, boolean restrictionEast, boolean restrictionSouth, boolean restrictionWest) {
+    public Room(String name, String description, boolean restrictionNorth, boolean restrictionEast, boolean restrictionSouth, boolean restrictionWest,String ) {
         super(name, description);
         this.restrictionNorth = restrictionNorth;
         this.restrictionEast = restrictionEast;
