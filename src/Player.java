@@ -42,7 +42,6 @@ public class Player extends LivingThing {
             if (item.getName().equals("NOTHING"))
                 inventory[i] = item;
         }
-
     }
 
     /**
@@ -93,10 +92,18 @@ public class Player extends LivingThing {
         this.roomColumn = roomColumn;
     }
 
+    /**
+     * Getter method for the player's level state
+     * @return The state of the player's location. (Ground or cabin)
+     */
     public int getFloor() {
         return floor;
     }
 
+    /**
+     * Setter method for the player's level state
+     * @param floor The new state of the player's location.
+     */
     public void setFloor(int floor) {
         this.floor = floor;
     }

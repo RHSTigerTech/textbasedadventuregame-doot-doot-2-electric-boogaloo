@@ -42,12 +42,10 @@ public class PlayGame {
                 "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.",false,false,true,false);
         cabin[2][2] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.",false,true,true,false);
 
-
         Scanner console = new Scanner(System.in);
         System.out.println("What is your name? ");
         String answer = console.nextLine();
         Player player1 = new Player(answer, "Player",11,5,5);
-
 
         boolean winCon = false;
         System.out.println("You are in a spaceship. " +
@@ -55,7 +53,6 @@ public class PlayGame {
                 " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship.| Use /help for a list of commands");
 
         while (!winCon) {
-
             command(ground,cabin,player1);
 
             //winCon = true;
@@ -101,7 +98,7 @@ public class PlayGame {
             System.out.println("Test");
         }
 
-        else if (answer.equalsIgnoreCase("/move west")){
+        else if (answer.equalsIgnoreCase("/move west")) {
             if (player1.getFloor()==0){
                 if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionWest())
                     System.out.println("You try to get through the solid wall but alas... you fail miserably.");
@@ -120,7 +117,7 @@ public class PlayGame {
             }
         }
 
-        else if (answer.equalsIgnoreCase("/move east")){
+        else if (answer.equalsIgnoreCase("/move east")) {
             if (player1.getFloor()==0) {
                 if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionEast())
                     System.out.println("You try to get through the solid wall but alas... you fail miserably.");
@@ -138,7 +135,7 @@ public class PlayGame {
                 }
             }
         }
-        else if (answer.equalsIgnoreCase("/move north")){
+        else if (answer.equalsIgnoreCase("/move north")) {
             if (player1.getFloor()==0) {
                 if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionNorth())
                     System.out.println("You try to get through the solid wall but alas... you fail miserably.");
@@ -156,7 +153,7 @@ public class PlayGame {
                 }
             }
         }
-        else if (answer.equalsIgnoreCase("/move south")){
+        else if (answer.equalsIgnoreCase("/move south")) {
             if (player1.getFloor()==0) {
                 if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionSouth())
                     System.out.println("You try to get through the solid wall but alas... you fail miserably.");
@@ -172,7 +169,7 @@ public class PlayGame {
                 printCabinMap(player1);
             }
         }
-        else if (answer.equalsIgnoreCase("/escape")){
+        else if (answer.equalsIgnoreCase("/escape")) {
             System.out.println("Try again wise guy.");
         }
         else{
@@ -181,6 +178,10 @@ public class PlayGame {
         }
     }
 
+    /**
+     * Prints the ground array on a reabable format
+     * @param player1 The player object
+     */
     public static void printGroundMap(Player player1){
 
         String a = " ";
@@ -210,7 +211,6 @@ public class PlayGame {
             f="@";
         }
 
-
         System.out.println(
                 "-------------" +
                 "\n| "+a+" | "+b+" | "+c+" |" +
@@ -219,8 +219,11 @@ public class PlayGame {
                 "\n-------------");
     }
 
+    /**
+     * Prints the cabin array on a reabable format
+     * @param player1 The player object
+     */
     public static void printCabinMap(Player player1){
-
         String a = " ";
         String b = " ";
         String c = " ";
@@ -230,7 +233,6 @@ public class PlayGame {
         String g = " ";
         String h = " ";
         String i = " ";
-
 
         if (player1.getRoomRow()==0 && player1.getRoomColumn()==0){
             a="@";
@@ -260,8 +262,6 @@ public class PlayGame {
             i="@";
         }
 
-
-
         System.out.println(
                 "-------------" +
                         "\n| "+a+" | "+b+" | "+c+" |" +
@@ -271,5 +271,4 @@ public class PlayGame {
                         "\n| "+g+" | "+h+" | "+i+" |" +
                         "\n-------------");
     }
-
 }

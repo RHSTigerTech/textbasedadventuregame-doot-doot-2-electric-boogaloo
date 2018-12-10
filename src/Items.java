@@ -10,9 +10,11 @@ public class Items extends NamedThing {
         super(name, description);
     }
 
+    /**
+     * Returns Item's properties on a readable format.
+     * @return The name of the item.
+     */
     public String toString(){
         return getName();
     }
-
-
 }
