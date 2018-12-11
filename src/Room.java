@@ -23,12 +23,13 @@ public class Room extends NamedThing {
      * @param restrictionSouth The southern border of the room.
      * @param restrictionWest The western border of the room.
      */
-    public Room(String name, String description, boolean restrictionNorth, boolean restrictionEast, boolean restrictionSouth, boolean restrictionWest) {
+    public Room(String name, String description, boolean restrictionNorth, boolean restrictionEast, boolean restrictionSouth, boolean restrictionWest, String activatableDescription) {
         super(name, description);
         this.restrictionNorth = restrictionNorth;
         this.restrictionEast = restrictionEast;
         this.restrictionSouth = restrictionSouth;
         this.restrictionWest = restrictionWest;
+        this.activatableDescription = activatableDescription;
     }
 
     /**
@@ -62,4 +63,9 @@ public class Room extends NamedThing {
     public boolean isRestrictionSouth() {
         return restrictionSouth;
     }
+
+    public String getActivatableDescription() {
+        return activatableDescription;
+    }
 }
+

@@ -15,32 +15,32 @@ public class PlayGame {
         Room[][] cabin = new Room[3][3];
 
         ground[0][0] = new Room("Old Quarters", "What once was your living quarters is now a trashed and broken room with claw marks on your bed and wall. There " +
-                "\nappears to be a loose board on the wall.", true, false,false,true);
+                "\nappears to be a loose board on the wall.", true, false,false,true,"BOARD");
         ground[0][1] = new Room("Airlock Room", "You are in a small room with an airlock however a key " +
                 "\ncomponet seems to be missing from the activation panel. It looks as if a small creature must have" +
-                "\nfiddled with it.",true,false,true,false);
+                "\nfiddled with it.",true,false,true,false,"BROKEN KEY PANEL");
         ground[0][2] = new Room("Control Room", "There is a screwdriver lying around in the corner and a lever that has been" +
-                "\nhastily boarded up with spare planks and panels.",true,true,true,false);
-        ground[1][0] = new Room("Cabin Entrance","A shut trap door lays at your feet. You can't seem to open it.",false,false,true,true);
-        ground[1][1] = new Room("The Bridge", "A large gap stands in your way. You could have sworn there WAS a bridge here.",true,false,true,false);
+                "\nhastily boarded up with spare planks and panels.",true,true,true,false, "BOARDS\nLEVER");
+        ground[1][0] = new Room("Cabin Entrance","A shut trap door lays at your feet. You can't seem to open it.",false,false,true,true,"TRAPDOOR");
+        ground[1][1] = new Room("The Bridge", "A large gap stands in your way. You could have sworn there WAS a bridge here.",true,false,true,false,"GAP");
         ground[1][2] = new Room("Maintenance Closet", "A ravaged room where the crew's supplies used to be." +
-                "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false);
+                "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false,"NOTHING");
 
         cabin[0][0] = new Room("Trapdoor entrance","A ladder leads back up to the GROUND floor..." +
-                "\nWhy would they call the floor above the CABIN the GROUND floor?",true,false,false,true);
-        cabin[0][1] = new Room("Security Panel","STATUS: LOCKED. PLEASE ENTER 5 DIGIT CODE.",true,false,false,false);
-        cabin[0][2] = new Room("Right Statue Hall","An adjustable statue stands in your way.",true,true,true,false);
+                "\nWhy would they call the floor above the CABIN the GROUND floor?",true,false,false,true,"LADDER");
+        cabin[0][1] = new Room("Security Panel","STATUS: LOCKED. PLEASE ENTER 5 DIGIT CODE.",true,false,false,false,"KEY PANEL");
+        cabin[0][2] = new Room("Right Statue Hall","An adjustable statue stands in your way.",true,true,true,false,"LEFT ARM\nHEAD\nRIGHT ARM");
         cabin[1][0] = new Room("Research lab","A lot of strewn notes and novels lay on the floor. \"Space Travel for DUMMIES\", " +
                 "\n\"Tips and Tricks for Avoiding Space Imps\", and a torn piece of paper labelled \"Password Reminder\": Does anyone want" +
-                "\na piece of pie?",false,false,false,true);
+                "\na piece of pie?",false,false,false,true,"READ PAPER");
         cabin[1][1] = new Room("Janitor Closet","A lone can of boring \"ANTI-SKELE SPRAY\" lays at your feet. Its" +
-                "\nmonochrome color could lull any imp to sleep. You almost don't want to take it.",false,true,false,true);
+                "\nmonochrome color could lull any imp to sleep. You almost don't want to take it.",false,true,false,true,"NOTHING");
         cabin[1][2] = new Room("Bathroom","Feces is on the wall, oil on the floor, and your key is in the toilet. You've spent" +
-                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.",true,true,false,true);
-        cabin[2][0] = new Room("Left Statue Hall","An adjustable statue stands in your way.",false,false,true,true);
+                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.",true,true,false,true,"FECES");
+        cabin[2][0] = new Room("Left Statue Hall","An adjustable statue stands in your way.",false,false,true,true,"LEFT ARM\nHEAD\nRIGHT ARM");
         cabin[2][1] = new Room("Manor Hall","Up on the diner table lays a message. \nIN ORDER FOR YOU TO SOLVE THE RIDDLE OF THE TWO STATUES" +
-                "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.",false,false,true,false);
-        cabin[2][2] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.",false,true,true,false);
+                "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.",false,false,true,false,"NOTHING");
+        cabin[2][2] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.",false,true,true,false,"HAVE A BAD TIME");
 
         Scanner console = new Scanner(System.in);
         System.out.println("What is your name? ");
@@ -95,7 +95,63 @@ public class PlayGame {
         }
 
         else if (answer.equalsIgnoreCase("/activate")) {
-            System.out.println("Test");
+            if (player1.getFloor()==0){
+                System.out.println("What would you like to activate: \n" + ground[player1.getRoomRow()][player1.getRoomColumn()].getActivatableDescription());
+                if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
+
+                }
+                else if (player1.getRoomRow()==0&&player1.getRoomColumn()==1) {
+
+                }
+                else if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
+
+                }
+                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==0) {
+
+                }
+                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==1) {
+
+                }
+                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==2) {
+
+                }
+                else {
+                    System.out.println("something went wrong my dude");
+                }
+            }
+            else{
+                System.out.println("What would you like to activate: \n" + cabin[player1.getRoomRow()][player1.getRoomColumn()].getActivatableDescription());
+                if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
+
+                }
+                else if (player1.getRoomRow()==0&&player1.getRoomColumn()==1) {
+
+                }
+                else if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
+
+                }
+                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==0) {
+
+                }
+                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==1) {
+
+                }
+                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==2) {
+
+                }
+                else if (player1.getRoomRow()==2&&player1.getRoomColumn()==0) {
+
+                }
+                else if (player1.getRoomRow()==2&&player1.getRoomColumn()==1) {
+
+                }
+                else if (player1.getRoomRow()==2&&player1.getRoomColumn()==2) {
+
+                }
+                else {
+                    System.out.println("something went wrong my dude");
+                }
+            }
         }
 
         else if (answer.equalsIgnoreCase("/move west")) {
@@ -270,5 +326,44 @@ public class PlayGame {
                         "\n-------------" +
                         "\n| "+g+" | "+h+" | "+i+" |" +
                         "\n-------------");
+    }
+
+    //ground floor activatables
+    public void activateLooseBoard(){
+
+    }
+
+    public void activateKeyPanel() {
+
+    }
+
+    public void activateBoards(){
+
+    }
+
+    public void activateTrapdoor(){
+
+    }
+
+    public void activateGap(){
+
+    }
+
+    //cabin floor activatables
+    public void activateLadder(){
+
+    }
+    public void activateCodePanel(){
+
+    }
+    public void activateRightStatue(){
+
+    }
+
+    public void activateLeftStatue(){
+
+    }
+    public void activateCourtdoor(){
+
     }
 }
