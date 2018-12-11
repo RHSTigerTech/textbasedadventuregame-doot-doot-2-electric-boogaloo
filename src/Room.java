@@ -22,6 +22,7 @@ public class Room extends NamedThing {
      * @param restrictionEast The eastern border of the room.
      * @param restrictionSouth The southern border of the room.
      * @param restrictionWest The western border of the room.
+     * @param activatableDescription The description of the room's activatable element.
      */
     public Room(String name, String description, boolean restrictionNorth, boolean restrictionEast, boolean restrictionSouth, boolean restrictionWest, String activatableDescription) {
         super(name, description);
@@ -64,6 +65,10 @@ public class Room extends NamedThing {
         return restrictionSouth;
     }
 
+    /**
+     * Getter method for the room's activatable
+     * @return The current activatable description
+     */
     public String getActivatableDescription() {
         return activatableDescription;
     }
