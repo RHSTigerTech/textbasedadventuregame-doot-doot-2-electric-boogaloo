@@ -8,8 +8,8 @@ public class PlayGame {
      */
     public static void main(String[] args) {
         Items screwdriver = new Items("Screwdriver", "An old screwdriver. It might be useful");
-        Items plank = new Items("An Old Plank", "Looks sturdy enough... maybe?");
         Items crowbar = new Items("Rusty Crowbar", "Could be useful.. or harmful.");
+        Items plank = new Items("An Old Plank", "Looks sturdy enough... maybe?");
 
         Room[][] ground = new Room[2][3];
         Room[][] cabin = new Room[3][3];
@@ -53,7 +53,7 @@ public class PlayGame {
                 " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship.| Use /help for a list of commands");
 
         while (!winCon) {
-            command(ground,cabin,player1);
+            command(ground,cabin,player1, plank);
 
             //winCon = true;
         }
@@ -63,7 +63,7 @@ public class PlayGame {
     /**
      * Command method for the user input
      */
-    public static void command(Room[][] ground, Room[][] cabin, Player player1) {
+    public static void command(Room[][] ground, Room[][] cabin, Player player1, Items plank) {
         Scanner input = new Scanner(System.in);
         String answer = input.nextLine();
         if (answer.equalsIgnoreCase("/help")) {
@@ -72,7 +72,8 @@ public class PlayGame {
                     "\n/move (NORTH,EAST,SOUTH,WEST): move in a direction" +
                     "\n/look: provides a description of your current room" +
                     "\n/pickup: prompts you if you would like to pickup any nearby objects" +
-                    "\n/activate: prompts you if you would like to activate any nearby objects");
+                    "\n/activate: prompts you if you would like to activate any nearby objects" +
+                    "\n/inventory: displays your current items");
         }
 
         else if (answer.equalsIgnoreCase("/look")) {
@@ -90,6 +91,10 @@ public class PlayGame {
             }
         }
 
+        else if (answer.equalsIgnoreCase("/inventory")){
+            System.out.println(player1);
+        }
+
         else if (answer.equalsIgnoreCase("/pickup")) {
             System.out.println(player1);
         }
@@ -100,7 +105,7 @@ public class PlayGame {
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
                     answer = input.nextLine();
                     if (answer.equalsIgnoreCase("board")){
-                        activateLooseBoard();
+                        activateLooseBoard(player1, plank);
                     }
                     else{
                         System.out.println("Uh.. What? Try /activate again");
@@ -110,7 +115,7 @@ public class PlayGame {
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==1) {
                     answer = input.nextLine();
                     if (answer.equalsIgnoreCase("broken key panel")){
-                        activateKeyPanel();
+                        activateKeyPanel(player1);
                     }
                     else{
                         System.out.println("Uh.. What? Try /activate again");
@@ -120,10 +125,10 @@ public class PlayGame {
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
                     answer = input.nextLine();
                     if (answer.equalsIgnoreCase("boards")){
-                        activateBoards(player1.isBoardsGone, player1.isHasCrowbar, player1);
+                        activateBoards(player1.isBoardsGone(), player1.isHasCrowbar(), player1);
                     }
                     else if (answer.equalsIgnoreCase("lever")){
-                        activateLever();
+                        activateLever(player1.isBoardsGone(),player1);
                     }
                     else{
                         System.out.println("Uh.. What? Try /activate again");
@@ -148,7 +153,7 @@ public class PlayGame {
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
                     answer = input.nextLine();
                     if (answer.equalsIgnoreCase("ladder")){
-                        activateLadder();
+                        activateLadder(player1);
                     }
                     else{
                         System.out.println("Uh.. What? Try /activate again");
@@ -379,15 +384,13 @@ public class PlayGame {
     }
 
     //ground floor activatables
-    public static boolean activateLooseBoard(boolean boardsGone, boolean hasCrowbar, Player player1){
-        if(hasCrowbar) {
-            boardsGone = true;
-            return boardsGone;
+    public static void activateLooseBoard(Player player1, Items plank){
+        if (player1.isHasBoard()){
+
         }
-        else {
-            System.out.println("You can't pry these boards off with you bare hands...\nIf only you had something to help.");
-            boardsGone = false;
-            return boardsGone;
+        else if (player1.isHasScrewdriver()){
+            System.out.println("You got the wooden plank off the wall!");
+            player1.setInventory(plank);
         }
     }
 
@@ -395,11 +398,26 @@ public class PlayGame {
 
     }
 
-    public static void activateBoards(Player player1){
-
+    public static void activateBoards(boolean boardsGone, boolean hasCrowbar, Player player1){
+        if(hasCrowbar) {
+            boardsGone = true;
+            player1.setBoardsGone(true);
+        }
+        else {
+            System.out.println("You can't pry these boards off with you bare hands...\nIf only you had something to help.");
+            boardsGone = false;
+            player1.setBoardsGone(true);
+        }
     }
 
     public static void activateLever(boolean boardsGone, Player player1){
+        if (boardsGone) {
+            player1.setActivatedLever(true);
+            System.out.println("You flipped the lever and heard a loud noise.");
+        }
+
+        else
+            System.out.println("There are boards in the way...");
 
     }
 
@@ -415,16 +433,7 @@ public class PlayGame {
     public static void activateLadder(Player player1){
 
     }
-    public static void activateCodePanel(Player player1){
 
-    }
-    public static void activateRightStatue(Player player1){
-
-    }
-
-    public static void activateLeftStatue(Player player1){
-
-    }
     public static void activateCourtdoor(Player player1){
 
     }

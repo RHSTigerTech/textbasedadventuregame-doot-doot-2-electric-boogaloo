@@ -5,6 +5,9 @@ public class Player extends LivingThing {
     private int floor;
     private boolean boardsGone;
     private boolean hasCrowbar;
+    private boolean activatedLever;
+    private boolean hasScrewdriver;
+    private boolean hasBoard;
 
     /**
      * Main constructor of Player.
@@ -21,6 +24,9 @@ public class Player extends LivingThing {
         floor = 0;
         boardsGone = false;
         hasCrowbar = false;
+        activatedLever = false;
+        hasScrewdriver = false;
+        hasBoard = false;
         inventory = new Items[5];
         inventory[0] = new Items("NOTHING", "STILL NOTHING");
         inventory[1] = new Items("NOTHING", "STILL NOTHING");
@@ -118,5 +124,37 @@ public class Player extends LivingThing {
 
     public boolean isHasCrowbar() {
         return hasCrowbar;
+    }
+
+    public void setBoardsGone(boolean boardsGone) {
+        this.boardsGone = boardsGone;
+    }
+
+    public void setHasCrowbar(boolean hasCrowbar) {
+        this.hasCrowbar = hasCrowbar;
+    }
+
+    public boolean isActivatedLever() {
+        return activatedLever;
+    }
+
+    public void setActivatedLever(boolean activatedLever) {
+        this.activatedLever = activatedLever;
+    }
+
+    public boolean isHasScrewdriver() {
+        return hasScrewdriver;
+    }
+
+    public void setHasScrewdriver(boolean hasScrewdriver) {
+        this.hasScrewdriver = hasScrewdriver;
+    }
+
+    public boolean isHasBoard() {
+        return hasBoard;
+    }
+
+    public void setHasBoard(boolean hasBoard) {
+        this.hasBoard = hasBoard;
     }
 }
