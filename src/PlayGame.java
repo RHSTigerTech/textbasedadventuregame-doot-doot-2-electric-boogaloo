@@ -98,12 +98,36 @@ public class PlayGame {
             if (player1.getFloor()==0){
                 System.out.println("What would you like to activate: \n" + ground[player1.getRoomRow()][player1.getRoomColumn()].getActivatableDescription());
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("board")){
+                        activateLooseBoard();
+                    }
+                    else{
+                        System.out.println("Uh.. What? Try /activate again");
+                    }
 
                 }
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==1) {
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("broken key panel")){
+                        activateKeyPanel();
+                    }
+                    else{
+                        System.out.println("Uh.. What? Try /activate again");
+                    }
 
                 }
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("boards")){
+                        activateBoards(player1.isBoardsGone, player1.isHasCrowbar, player1);
+                    }
+                    else if (answer.equalsIgnoreCase("lever")){
+                        activateLever();
+                    }
+                    else{
+                        System.out.println("Uh.. What? Try /activate again");
+                    }
 
                 }
                 else if (player1.getRoomRow()==1&&player1.getRoomColumn()==0) {
@@ -122,6 +146,13 @@ public class PlayGame {
             else{
                 System.out.println("What would you like to activate: \n" + cabin[player1.getRoomRow()][player1.getRoomColumn()].getActivatableDescription());
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("ladder")){
+                        activateLadder();
+                    }
+                    else{
+                        System.out.println("Uh.. What? Try /activate again");
+                    }
 
                 }
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==1) {
@@ -170,7 +201,12 @@ public class PlayGame {
                     player1.setRoomColumn(player1.getRoomColumn() - 1);
                     printCabinMap(player1);
                 }
+
             }
+            else {
+                System.out.println("somethin went wrong");
+            }
+
         }
 
         else if (answer.equalsIgnoreCase("/move east")) {
@@ -182,7 +218,7 @@ public class PlayGame {
                     printGroundMap(player1);
                 }
             }
-            else {
+            else if (player1.getFloor()==1) {
                 if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionEast())
                     System.out.println("You try to get through the solid wall but alas... you fail miserably.");
                 else {
@@ -190,23 +226,30 @@ public class PlayGame {
                     printCabinMap(player1);
                 }
             }
+            else {
+                System.out.println("somethin went wrong");
+            }
         }
         else if (answer.equalsIgnoreCase("/move north")) {
             if (player1.getFloor()==0) {
                 if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionNorth())
                     System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+
                 else {
                     player1.setRoomRow(player1.getRoomRow() - 1);
                     printGroundMap(player1);
                 }
             }
-            else {
+            else if (player1.getFloor()==1) {
                 if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionNorth())
                     System.out.println("You try to get through the solid wall but alas... you fail miserably.");
                 else {
                     player1.setRoomRow(player1.getRoomRow() - 1);
                     printCabinMap(player1);
                 }
+            }
+            else {
+                System.out.println("somethin went wrong");
             }
         }
         else if (answer.equalsIgnoreCase("/move south")) {
@@ -218,16 +261,23 @@ public class PlayGame {
                     printGroundMap(player1);
                 }
             }
-            if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionSouth())
-                System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+            else if (player1.getFloor()==1) {
+                if (cabin[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionSouth())
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                else {
+                    player1.setRoomRow(player1.getRoomRow() + 1);
+                    printCabinMap(player1);
+                }
+            }
             else {
-                player1.setRoomRow(player1.getRoomRow() + 1);
-                printCabinMap(player1);
+                System.out.println("somethin went wrong");
             }
         }
+
         else if (answer.equalsIgnoreCase("/escape")) {
             System.out.println("Try again wise guy.");
         }
+
         else{
             System.out.println("Oak's words echoed... There's a time and place for everything, but not now." +
                     "\nThis is strange because you don't know a Professor Oak but his warning probably means something important anyway.");
@@ -329,41 +379,53 @@ public class PlayGame {
     }
 
     //ground floor activatables
-    public void activateLooseBoard(){
+    public static boolean activateLooseBoard(boolean boardsGone, boolean hasCrowbar, Player player1){
+        if(hasCrowbar) {
+            boardsGone = true;
+            return boardsGone;
+        }
+        else {
+            System.out.println("You can't pry these boards off with you bare hands...\nIf only you had something to help.");
+            boardsGone = false;
+            return boardsGone;
+        }
+    }
+
+    public static void activateKeyPanel(Player player1) {
 
     }
 
-    public void activateKeyPanel() {
+    public static void activateBoards(Player player1){
 
     }
 
-    public void activateBoards(){
+    public static void activateLever(boolean boardsGone, Player player1){
 
     }
 
-    public void activateTrapdoor(){
+    public static void activateTrapdoor(Player player1){
 
     }
 
-    public void activateGap(){
+    public static void activateGap(Player player1){
 
     }
 
     //cabin floor activatables
-    public void activateLadder(){
+    public static void activateLadder(Player player1){
 
     }
-    public void activateCodePanel(){
+    public static void activateCodePanel(Player player1){
 
     }
-    public void activateRightStatue(){
+    public static void activateRightStatue(Player player1){
 
     }
 
-    public void activateLeftStatue(){
+    public static void activateLeftStatue(Player player1){
 
     }
-    public void activateCourtdoor(){
+    public static void activateCourtdoor(Player player1){
 
     }
 }

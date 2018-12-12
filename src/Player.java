@@ -3,6 +3,8 @@ public class Player extends LivingThing {
     private int roomRow;
     private int roomColumn;
     private int floor;
+    private boolean boardsGone;
+    private boolean hasCrowbar;
 
     /**
      * Main constructor of Player.
@@ -16,7 +18,9 @@ public class Player extends LivingThing {
         super(name, description, health, strength, defense);
         roomRow = 0;
         roomColumn = 1;
-        floor = 1;
+        floor = 0;
+        boardsGone = false;
+        hasCrowbar = false;
         inventory = new Items[5];
         inventory[0] = new Items("NOTHING", "STILL NOTHING");
         inventory[1] = new Items("NOTHING", "STILL NOTHING");
@@ -106,5 +110,13 @@ public class Player extends LivingThing {
      */
     public void setFloor(int floor) {
         this.floor = floor;
+    }
+
+    public boolean isBoardsGone() {
+        return boardsGone;
+    }
+
+    public boolean isHasCrowbar() {
+        return hasCrowbar;
     }
 }
