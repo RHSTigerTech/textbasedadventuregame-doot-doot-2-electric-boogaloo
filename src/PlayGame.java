@@ -53,7 +53,7 @@ public class PlayGame {
                 " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship.| Use /help for a list of commands");
 
         while (!winCon) {
-            command(ground,cabin,player1, plank);
+            command(ground,cabin,player1, plank, screwdriver, crowbar);
 
             //winCon = true;
         }
@@ -63,7 +63,7 @@ public class PlayGame {
     /**
      * Command method for the user input
      */
-    public static void command(Room[][] ground, Room[][] cabin, Player player1, Items plank) {
+    public static void command(Room[][] ground, Room[][] cabin, Player player1, Items plank, Items screwdriver, Items crowbar) {
         Scanner input = new Scanner(System.in);
         String answer = input.nextLine();
         if (answer.equalsIgnoreCase("/help")) {
@@ -96,7 +96,37 @@ public class PlayGame {
         }
 
         else if (answer.equalsIgnoreCase("/pickup")) {
-            System.out.println(player1);
+            if (player1.getFloor()==0){
+                System.out.println("What would you like to pickup: \n" + ground[player1.getRoomRow()][player1.getRoomColumn()].getPickupDescription());
+                if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("screwdriver")&&!player1.isHasScrewdriver()){
+                        pickupScrewdriver(ground, player1, screwdriver);
+                    }
+                    else{
+                        System.out.println("Uh.. What? Try /pickup again");
+                    }
+                }
+
+                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==2) {
+                    if (answer.equalsIgnoreCase("crowbar") && !player1.isHasCrowbar()){
+                        pickupCrowbar(ground, player1, crowbar);
+                    }
+                }
+                else {
+                    System.out.println("something went wrong my dude");
+                }
+            }
+            else{
+                System.out.println("What would you like to pickup: \n" + cabin[player1.getRoomRow()][player1.getRoomColumn()].getActivatableDescription());
+
+                if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
+
+                }
+                else {
+                    System.out.println("something went wrong my dude");
+                }
+            }
         }
 
         else if (answer.equalsIgnoreCase("/activate")) {
@@ -405,6 +435,13 @@ public class PlayGame {
             ground[0][2].setActivatableDescription("NOTHING");
             ground[1][0].setDescription("An open TRAPDOOR lays at your feet as thick cold air blows at your feet.");
             System.out.println("You flipped the LEVER and heard a loud noise.");
+
+            if (player1.isHasScrewdriver()) {
+                ground[0][2].setDescription("Nothing remains in this room except a flipped lever");
+            }
+            else {
+                ground[0][2].setDescription("A SCREWDRIVER remains...");
+            }
         }
 
         else
@@ -449,13 +486,25 @@ public class PlayGame {
         System.out.println("You went to the GROUND floor!");
     }
 
-    public static void pickupCrowbar(Player player1, Items crowbar) {
+    public static void pickupCrowbar(Room[][] ground, Player player1, Items crowbar) {
         player1.setInventory(crowbar);
         player1.setHasCrowbar(true);
+        ground[1][2].setPickupDescription("NOTHING");
+        ground[1][2].setDescription("This room has been SACKED");
+
+
     }
 
-    public static void pickupScrewdriver(Player player1, Items screwdriver) {
+    public static void pickupScrewdriver(Room[][] ground, Player player1, Items screwdriver) {
         player1.setInventory(screwdriver);
+        System.out.println("You got the SCREWDRIVER!");
         player1.setHasScrewdriver(true);
+        ground[0][2].setPickupDescription("NOTHING");
+        if (player1.isActivatedLever()) {
+            ground[0][2].setDescription("Nothing remains in this room except a flipped lever");
+        }
+        else {
+            ground[0][2].setDescription("A LEVER that has been hastily boarded up remains");
+        }
     }
 }

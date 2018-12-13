@@ -64,9 +64,10 @@ public class Player extends LivingThing {
         return "Health: " + super.getHealth() +
                 "\nStrength: " + super.getStrength() +
                 "\nDefense: " + super.getDefense() +
-                "\nINVENTORY 1: " + inventory[0] +
-                "\nINVENTORY 2: " + inventory[1] +
-                "\nINVENTORY 3: " + inventory[2];
+                "\nINVENTORY 1: " + inventory[0].toString() +
+                "\nINVENTORY 2: " + inventory[1].toString() +
+                "\nINVENTORY 3: " + inventory[2].toString() +
+                "\nINVENTORY 4: " + inventory[3].toString();
     }
 
     /**

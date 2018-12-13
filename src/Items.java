@@ -15,6 +15,6 @@ public class Items extends NamedThing {
      * @return The name of the item.
      */
     public String toString(){
-        return getName();
+        return getName() + ": " + getDescription();
     }
 }

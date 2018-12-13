@@ -94,5 +94,13 @@ public class Room extends NamedThing {
     public void setActivatableDescription(String activatableDescription) {
         this.activatableDescription = activatableDescription;
     }
+
+    public String getPickupDescription() {
+        return pickupDescription;
+    }
+
+    public void setPickupDescription(String pickupDescription) {
+        this.pickupDescription = pickupDescription;
+    }
 }
 
