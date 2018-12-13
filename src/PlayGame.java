@@ -108,13 +108,14 @@ public class PlayGame {
                     }
                 }
 
-                else if (player1.getRoomRow()==1&&player1.getRoomColumn()==2) {
+                else if (player1.getRoomRow()==1 && player1.getRoomColumn()==2) {
+                    answer = input.nextLine();
                     if (answer.equalsIgnoreCase("crowbar") && !player1.isHasCrowbar()){
                         pickupCrowbar(ground, player1, crowbar);
                     }
-                }
-                else {
-                    System.out.println("something went wrong my dude");
+                    else {
+                        System.out.println("Uh.. What? Try /pickup again");
+                    }
                 }
             }
             else{
@@ -122,9 +123,6 @@ public class PlayGame {
 
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
 
-                }
-                else {
-                    System.out.println("something went wrong my dude");
                 }
             }
         }
@@ -135,7 +133,7 @@ public class PlayGame {
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
                     answer = input.nextLine();
                     if (answer.equalsIgnoreCase("board")&& !player1.isHasBoard()){
-                        activateLooseBoard(player1, plank);
+                        activateLooseBoard(ground, player1, plank);
                     }
                     else{
                         System.out.println("Uh.. What? Try /activate again");
@@ -408,13 +406,18 @@ public class PlayGame {
      * @param player1 The current player object
      * @param plank The plank to be broken
      */
-    public static void activateLooseBoard(Player player1, Items plank){
-        if (player1.isHasBoard()){
+    public static void activateLooseBoard(Room[][] ground, Player player1, Items plank){
+        if (!player1.isHasScrewdriver()) {
+            System.out.println("This board is loose but you need some kind of tool to help it off");
+        }
+        else if (player1.isHasBoard()){
 
         }
         else if (player1.isHasScrewdriver()){
             System.out.println("You got the wooden plank off the wall!");
             player1.setInventory(plank);
+            player1.setHasBoard(true);
+            ground[0][0].setActivatableDescription("NOTHING");
         }
     }
 
@@ -530,6 +533,7 @@ public class PlayGame {
     public static void pickupCrowbar(Room[][] ground, Player player1, Items crowbar) {
         player1.setInventory(crowbar);
         player1.setHasCrowbar(true);
+        System.out.println("You got the CROWBAR!");
         ground[1][2].setPickupDescription("NOTHING");
         ground[1][2].setDescription("This room has been SACKED");
 
