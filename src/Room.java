@@ -72,5 +72,25 @@ public class Room extends NamedThing {
     public String getActivatableDescription() {
         return activatableDescription;
     }
+
+    public void setRestrictionNorth(boolean restrictionNorth) {
+        this.restrictionNorth = restrictionNorth;
+    }
+
+    public void setRestrictionEast(boolean restrictionEast) {
+        this.restrictionEast = restrictionEast;
+    }
+
+    public void setRestrictionSouth(boolean restrictionSouth) {
+        this.restrictionSouth = restrictionSouth;
+    }
+
+    public void setRestrictionWest(boolean restrictionWest) {
+        this.restrictionWest = restrictionWest;
+    }
+
+    public void setActivatableDescription(String activatableDescription) {
+        this.activatableDescription = activatableDescription;
+    }
 }
 
