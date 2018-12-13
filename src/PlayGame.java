@@ -350,7 +350,7 @@ public class PlayGame {
 
     /**
      * Prints the cabin array on a reabable format
-     * @param player1 The player object
+     * @param player1 The current player object
      */
     public static void printCabinMap(Player player1){
         String a = " ";
@@ -402,6 +402,12 @@ public class PlayGame {
     }
 
     //ground floor activatables
+
+    /**
+     * Activator for the loose board
+     * @param player1 The current player object
+     * @param plank The plank to be broken
+     */
     public static void activateLooseBoard(Player player1, Items plank){
         if (player1.isHasBoard()){
 
@@ -412,10 +418,19 @@ public class PlayGame {
         }
     }
 
+    /**
+     * Activator for the key panel.
+     * @param player1 The current player object
+     */
     public static void activateKeyPanel(Player player1) {
 
     }
 
+    /**
+     * Activator for the boards
+     * @param ground The ground state of Room
+     * @param player1 The current player object
+     */
     public static void activateBoards(Room[][] ground, Player player1){
         if(player1.isHasCrowbar()) {
             player1.setBoardsGone(true);
@@ -429,6 +444,12 @@ public class PlayGame {
         }
     }
 
+    /**
+     * Activator for the lever
+     * @param ground The ground state of Room
+     * @param boardsGone Are the boards gone?
+     * @param player1 The current player object
+     */
     public static void activateLever(Room[][] ground, boolean boardsGone, Player player1){
         if (boardsGone) {
             player1.setActivatedLever(true);
@@ -449,6 +470,10 @@ public class PlayGame {
 
     }
 
+    /**
+     * Activator for the cabin trap door
+     * @param player1 The current player object
+     */
     public static void activateTrapdoor(Player player1){
         if (player1.isActivatedLever()) {
             System.out.println("You went into the CABIN floor!");
@@ -463,6 +488,11 @@ public class PlayGame {
 
     }
 
+    /**
+     * Activator for the board gaps
+     * @param ground The ground state of Room
+     * @param player1 The current player object
+     */
     public static void activateGap(Room[][] ground, Player player1){
         if (player1.isHasBoard()) {
             ground[1][1].setRestrictionEast(false);
@@ -478,6 +508,11 @@ public class PlayGame {
     }
 
     //cabin floor activatables
+
+    /**
+     * Activator for the cabin ladder
+     * @param player1 The current player object
+     */
     public static void activateLadder(Player player1){
         player1.setRoomColumn(0);
         player1.setRoomRow(1);
@@ -486,6 +521,12 @@ public class PlayGame {
         System.out.println("You went to the GROUND floor!");
     }
 
+    /**
+     * Pickup method for the crowbar
+     * @param ground The ground state of Room
+     * @param player1 The current player object
+     * @param crowbar The crowbar Item
+     */
     public static void pickupCrowbar(Room[][] ground, Player player1, Items crowbar) {
         player1.setInventory(crowbar);
         player1.setHasCrowbar(true);
@@ -495,6 +536,12 @@ public class PlayGame {
 
     }
 
+    /**
+     * Pickup method for the screwdriver
+     * @param ground The ground state of Room
+     * @param player1 The current player object
+     * @param screwdriver The screwdriver Item
+     */
     public static void pickupScrewdriver(Room[][] ground, Player player1, Items screwdriver) {
         player1.setInventory(screwdriver);
         System.out.println("You got the SCREWDRIVER!");

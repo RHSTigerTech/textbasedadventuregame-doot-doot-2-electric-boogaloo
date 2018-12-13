@@ -118,50 +118,98 @@ public class Player extends LivingThing {
         this.floor = floor;
     }
 
+    /**
+     * Getter method for boardsGone
+     * @return Are the boards gone?
+     */
     public boolean isBoardsGone() {
         return boardsGone;
     }
 
+    /**
+     * Getter method for hasCrowbar
+     * @return Does the Player have the crowbar?
+     */
     public boolean isHasCrowbar() {
         return hasCrowbar;
     }
 
+    /**
+     * Setter method for boardsGone
+     * @param boardsGone The new state of the boards
+     */
     public void setBoardsGone(boolean boardsGone) {
         this.boardsGone = boardsGone;
     }
 
+    /**
+     * Setter method for hasCrowbar
+     * @param hasCrowbar The new state of the crowbar
+     */
     public void setHasCrowbar(boolean hasCrowbar) {
         this.hasCrowbar = hasCrowbar;
     }
 
+    /**
+     * Getter method for activatedLever
+     * @return Is the lever activated?
+     */
     public boolean isActivatedLever() {
         return activatedLever;
     }
 
+    /**
+     * Setter method for activatedLever
+     * @param activatedLever The new state of the lever
+     */
     public void setActivatedLever(boolean activatedLever) {
         this.activatedLever = activatedLever;
     }
 
+    /**
+     * Getter method for hasScrewdriver
+     * @return Does the player have the screwdriver?
+     */
     public boolean isHasScrewdriver() {
         return hasScrewdriver;
     }
 
+    /**
+     * Setter method for screwdriver
+     * @param hasScrewdriver The new state of the screwdriver
+     */
     public void setHasScrewdriver(boolean hasScrewdriver) {
         this.hasScrewdriver = hasScrewdriver;
     }
 
+    /**
+     * Getter method for hasBoard
+     * @return Does the player have the board?
+     */
     public boolean isHasBoard() {
         return hasBoard;
     }
 
+    /**
+     * Setter method for hasBoard
+     * @param hasBoard The new state of the board
+     */
     public void setHasBoard(boolean hasBoard) {
         this.hasBoard = hasBoard;
     }
 
+    /**
+     * Getter method for crossable
+     * @return The current state of crossable
+     */
     public boolean isCrossable() {
         return crossable;
     }
 
+    /**
+     * Setter method for the crossable
+     * @param crossable The new state of crossable
+     */
     public void setCrossable(boolean crossable) {
         this.crossable = crossable;
     }

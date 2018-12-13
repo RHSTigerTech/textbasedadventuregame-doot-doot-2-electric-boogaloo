@@ -75,30 +75,58 @@ public class Room extends NamedThing {
         return activatableDescription;
     }
 
+    /**
+     * Setter method for the room's northern border
+     * @param restrictionNorth The new northern border of the room
+     */
     public void setRestrictionNorth(boolean restrictionNorth) {
         this.restrictionNorth = restrictionNorth;
     }
 
+    /**
+     * Setter method for the room's eastern border
+     * @param restrictionEast The new eastern border of the room
+     */
     public void setRestrictionEast(boolean restrictionEast) {
         this.restrictionEast = restrictionEast;
     }
 
+    /**
+     * Setter method for the room's southern border
+     * @param restrictionSouth The new southern border of the room
+     */
     public void setRestrictionSouth(boolean restrictionSouth) {
         this.restrictionSouth = restrictionSouth;
     }
 
+    /**
+     * Setter method for the room's western border
+     * @param restrictionWest The new western border of the room
+     */
     public void setRestrictionWest(boolean restrictionWest) {
         this.restrictionWest = restrictionWest;
     }
 
+    /**
+     * Setter method for the activatable's description
+     * @param activatableDescription The new description of the activatable
+     */
     public void setActivatableDescription(String activatableDescription) {
         this.activatableDescription = activatableDescription;
     }
 
+    /**
+     * Getter method for the pickup description
+     * @return The pickup description
+     */
     public String getPickupDescription() {
         return pickupDescription;
     }
 
+    /**
+     * Setter method for the pickup item's description
+     * @param pickupDescription The new description of the pickup
+     */
     public void setPickupDescription(String pickupDescription) {
         this.pickupDescription = pickupDescription;
     }
