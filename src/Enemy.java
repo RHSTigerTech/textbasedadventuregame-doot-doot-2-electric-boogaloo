@@ -1,5 +1,5 @@
 public class Enemy extends LivingThing {
-    private String[] dialog;
+    private String dialog;
 
     /**
      * Main constructor of Enemy
@@ -10,7 +10,7 @@ public class Enemy extends LivingThing {
      * @param defense Ability to resist attacks
      * @param dialog A set speech from the enemy.
      */
-    public Enemy(String name, String description, int health, int strength, int defense, String[] dialog) {
+    public Enemy(String name, String description, int health, int strength, int defense, String dialog) {
         super(name, description, health, strength, defense);
         this.dialog = dialog;
     }
@@ -19,7 +19,7 @@ public class Enemy extends LivingThing {
      * Getter method for dialog
      * @return The dialog string
      */
-    public String[] getDialog() {
+    public String getDialog() {
         return dialog;
     }
 
@@ -27,7 +27,7 @@ public class Enemy extends LivingThing {
      * Setter method for dialog
      * @param dialog The current dialog string
      */
-    public void setDialog(String[] dialog) {
+    public void setDialog(String dialog) {
         this.dialog = dialog;
     }
 }

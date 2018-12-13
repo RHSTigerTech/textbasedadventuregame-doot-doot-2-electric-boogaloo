@@ -9,6 +9,7 @@ public class Player extends LivingThing {
     private boolean hasScrewdriver;
     private boolean hasBoard;
     private boolean crossable;
+    private boolean winCon;
 
     /**
      * Main constructor of Player.
@@ -29,6 +30,7 @@ public class Player extends LivingThing {
         hasScrewdriver = false;
         hasBoard = false;
         crossable = false;
+        winCon = false;
         inventory = new Items[4];
         inventory[0] = new Items("NOTHING", "STILL NOTHING");
         inventory[1] = new Items("NOTHING", "STILL NOTHING");
@@ -212,5 +214,13 @@ public class Player extends LivingThing {
      */
     public void setCrossable(boolean crossable) {
         this.crossable = crossable;
+    }
+
+    public boolean isWinCon() {
+        return winCon;
+    }
+
+    public void setWinCon(boolean winCon) {
+        this.winCon = winCon;
     }
 }

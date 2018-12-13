@@ -52,12 +52,12 @@ public class PlayGame {
                 "Your only chance at escaping is to dock onto a nearby ship that responded to your SOS." +
                 " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship.| Use /help for a list of commands");
 
-        while (!winCon) {
+        while (!player1.isWinCon()) {
             command(ground,cabin,player1, plank, screwdriver, crowbar);
 
             //winCon = true;
         }
-        System.out.println("You win!");
+
     }
 
     /**
@@ -213,6 +213,7 @@ public class PlayGame {
                 else {
                     player1.setRoomColumn(player1.getRoomColumn() - 1);
                     printGroundMap(player1);
+                    //fight(player1);
                 }
             }
             else if(player1.getFloor()==1) {
@@ -237,6 +238,7 @@ public class PlayGame {
                 else {
                     player1.setRoomColumn(player1.getRoomColumn() + 1);
                     printGroundMap(player1);
+                    //fight(player1);
                 }
             }
             else if (player1.getFloor()==1) {
@@ -259,6 +261,7 @@ public class PlayGame {
                 else {
                     player1.setRoomRow(player1.getRoomRow() - 1);
                     printGroundMap(player1);
+                    //fight(player1);
                 }
             }
             else if (player1.getFloor()==1) {
@@ -280,6 +283,7 @@ public class PlayGame {
                 else {
                     player1.setRoomRow(player1.getRoomRow() + 1);
                     printGroundMap(player1);
+                   //fight(player1);
                 }
             }
             else if (player1.getFloor()==1) {
@@ -557,5 +561,64 @@ public class PlayGame {
         else {
             ground[0][2].setDescription("A LEVER that has been hastily boarded up remains");
         }
+    }
+
+    public static void fight(Player player1){
+        if (Math.random()<0.21){
+            if (Math.random()<0.51){
+                fightImp(player1);
+            }
+            else
+                fightBrute(player1);
+        }
+
+    }
+
+    public static void fightImp(Player player1){
+        System.out.println(
+                "                                    ,\n" +
+                        "       ,  .   (          )          -.\\ |\n" +
+                        "       | / .- |\\        /|         _  \\'/\n" +
+                        "        \\'/   | \\.-\"\"-./ |          \\_) ;-'\n" +
+                        "     `'-; (_/ ;   _  _   ;           ) /\n" +
+                        "         \\ (   \\ (.\\/.) /    .-.    / |\n" +
+                        "          \\ \\   \\ \\/\\/ /-._.'   \\   | |\n" +
+                        "           \\ \\   \\ .. /_         \\  | |\n" +
+                        "            \\ \\   |  |__)     |\\  \\ | |\n" +
+                        "             \\ `\"`|==|_       | \\  \\| |\n" +
+                        "              \\,-'|==| \\      |  \\    |\n" +
+                        "                   \\/   '.    /   `\\ /\n" +
+                        "                          |   |     `   ,\n" +
+                        "                          |   |         )\\\n" +
+                        "                __.....__/    |        /  \\\n" +
+                        "              /`              \\        `//`\n" +
+                        "              |  \\`-....-'\\    `-.____.'/\n" +
+                        "              |  |        /   /`\"-----'`\n" +
+                        "              |  |        |  |\n" +
+                        "              | /         |  |\n" +
+                        "       .------' \\         /  /\n" +
+                        "      (((--------'        \\  |\n" +
+                        "                           | \\\n" +
+                        "                           | |\n" +
+                        "                           | |\n" +
+                        "                           | /\n" +
+                        "                          /  )\n" +
+                        "                         /   |\n" +
+                        "                        (-(-('"
+
+        );
+        System.out.println("An IMP appears before you!");
+        Imp newIMP = new Imp("Hee... Hee... I used your toothbrush for OBSCENE Things!!..",(int)(Math.random()*4+4),(int)(Math.random()*2+2),(int)(Math.random()*2+2));
+        while (newIMP.getHealth()>0){
+            if(player1.getHealth()<=0){
+                System.out.println("You died!");
+                System.exit(0);
+            }
+
+        }
+
+    }
+    public static void fightBrute(Player player1){
+        System.out.println("you got a bresfsf");
     }
 }
