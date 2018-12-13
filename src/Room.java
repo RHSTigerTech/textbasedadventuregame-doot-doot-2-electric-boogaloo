@@ -4,6 +4,7 @@ public class Room extends NamedThing {
     private boolean restrictionSouth;
     private boolean restrictionWest;
     private String activatableDescription;
+    private String pickupDescription;
 
     /**
      * Main constructor of Room
@@ -24,13 +25,14 @@ public class Room extends NamedThing {
      * @param restrictionWest The western border of the room.
      * @param activatableDescription The description of the room's activatable element.
      */
-    public Room(String name, String description, boolean restrictionNorth, boolean restrictionEast, boolean restrictionSouth, boolean restrictionWest, String activatableDescription) {
+    public Room(String name, String description, boolean restrictionNorth, boolean restrictionEast, boolean restrictionSouth, boolean restrictionWest, String activatableDescription, String pickupDescription) {
         super(name, description);
         this.restrictionNorth = restrictionNorth;
         this.restrictionEast = restrictionEast;
         this.restrictionSouth = restrictionSouth;
         this.restrictionWest = restrictionWest;
         this.activatableDescription = activatableDescription;
+        this.pickupDescription = pickupDescription;
     }
 
     /**

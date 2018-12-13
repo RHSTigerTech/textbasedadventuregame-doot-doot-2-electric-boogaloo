@@ -8,6 +8,7 @@ public class Player extends LivingThing {
     private boolean activatedLever;
     private boolean hasScrewdriver;
     private boolean hasBoard;
+    private boolean crossable;
 
     /**
      * Main constructor of Player.
@@ -27,12 +28,12 @@ public class Player extends LivingThing {
         activatedLever = false;
         hasScrewdriver = false;
         hasBoard = false;
-        inventory = new Items[5];
+        crossable = false;
+        inventory = new Items[4];
         inventory[0] = new Items("NOTHING", "STILL NOTHING");
         inventory[1] = new Items("NOTHING", "STILL NOTHING");
         inventory[2] = new Items("NOTHING", "STILL NOTHING");
         inventory[3] = new Items("NOTHING", "STILL NOTHING");
-        inventory[4] = new Items("NOTHING", "STILL NOTHING");
     }
 
     /**
@@ -48,7 +49,7 @@ public class Player extends LivingThing {
      * @param item The current inventory array
      */
     public void setInventory(Items item) {
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 4; i++){
             if (item.getName().equals("NOTHING"))
                 inventory[i] = item;
         }
@@ -65,9 +66,7 @@ public class Player extends LivingThing {
                 "\nDefense: " + super.getDefense() +
                 "\nINVENTORY 1: " + inventory[0] +
                 "\nINVENTORY 2: " + inventory[1] +
-                "\nINVENTORY 3: " + inventory[2] +
-                "\nINVENTORY 4: " + inventory[3] +
-                "\nINVENTORY 5: " + inventory[4];
+                "\nINVENTORY 3: " + inventory[2];
     }
 
     /**
@@ -156,5 +155,13 @@ public class Player extends LivingThing {
 
     public void setHasBoard(boolean hasBoard) {
         this.hasBoard = hasBoard;
+    }
+
+    public boolean isCrossable() {
+        return crossable;
+    }
+
+    public void setCrossable(boolean crossable) {
+        this.crossable = crossable;
     }
 }

@@ -15,19 +15,19 @@ public class PlayGame {
         Room[][] cabin = new Room[3][3];
 
         ground[0][0] = new Room("Old Quarters", "What once was your living quarters is now a trashed and broken room with claw marks on your bed and wall. There " +
-                "\nappears to be a loose board on the wall.", true, false,false,true,"BOARD");
+                "\nappears to be a loose board on the wall.", true, false,false,true,"BOARD","NOTHING");
         ground[0][1] = new Room("Airlock Room", "You are in a small room with an airlock however a key " +
                 "\ncomponet seems to be missing from the activation panel. It looks as if a small creature must have" +
-                "\nfiddled with it.",true,false,true,false,"BROKEN KEY PANEL");
+                "\nfiddled with it.",true,false,true,false,"BROKEN KEY PANEL", "NOTHING");
         ground[0][2] = new Room("Control Room", "There is a screwdriver lying around in the corner and a lever that has been" +
-                "\nhastily boarded up with spare planks and panels.",true,true,true,false, "BOARDS\nLEVER");
-        ground[1][0] = new Room("Cabin Entrance","A shut trap door lays at your feet. You can't seem to open it.",false,false,true,true,"TRAPDOOR");
-        ground[1][1] = new Room("The Bridge", "A large gap stands in your way. You could have sworn there WAS a bridge here.",true,true,true,false,"GAP");
+                "\nhastily boarded up with spare planks and panels.",true,true,true,false, "BOARDS\nLEVER","SCREWDRIVER");
+        ground[1][0] = new Room("Cabin Entrance","A shut TRAPDOOR lays at your feet. You can't seem to open it.",false,false,true,true,"TRAPDOOR", "NOTHING");
+        ground[1][1] = new Room("The Bridge", "A large gap stands in your way. You could have sworn there WAS a bridge here.",true,true,true,false,"GAP","NOTHING");
         ground[1][2] = new Room("Maintenance Closet", "A ravaged room where the crew's supplies used to be." +
-                "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false,"NOTHING");
+                "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false,"NOTHING", "CROWBAR");
 
         cabin[0][0] = new Room("Trapdoor entrance","A ladder leads back up to the GROUND floor..." +
-                "\nWhy would they call the floor above the CABIN the GROUND floor?",true,false,false,true,"LADDER");
+                "\nWhy would they call the floor above the CABIN the GROUND floor?",true,false,false,true,"LADDER","NOTHING");
 //        cabin[0][1] = new Room("Security Panel","STATUS: LOCKED. PLEASE ENTER 5 DIGIT CODE.",true,false,false,false,"KEY PANEL");
 //        cabin[0][2] = new Room("Right Statue Hall","An adjustable statue stands in your way.",true,true,true,false,"LEFT ARM\nHEAD\nRIGHT ARM");
 //        cabin[1][0] = new Room("Research lab","A lot of strewn notes and novels lay on the floor. \"Space Travel for DUMMIES\", " +
@@ -36,11 +36,11 @@ public class PlayGame {
 //        cabin[1][1] = new Room("Janitor Closet","A lone can of boring \"ANTI-SKELE SPRAY\" lays at your feet. Its" +
 //                "\nmonochrome color could lull any imp to sleep. You almost don't want to take it.",false,true,false,true,"NOTHING");
         cabin[0][2] = new Room("Bathroom","Feces is on the wall, oil on the floor, and your key is in the toilet. You've spent" +
-                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.",true,true,false,true,"FECES");
+                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.",true,true,false,true,"FECES", "KEY");
 //        cabin[2][0] = new Room("Left Statue Hall","An adjustable statue stands in your way.",false,false,true,true,"LEFT ARM\nHEAD\nRIGHT ARM");
 //        cabin[2][1] = new Room("Manor Hall","Up on the diner table lays a message. \nIN ORDER FOR YOU TO SOLVE THE RIDDLE OF THE TWO STATUES" +
 //                "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.",false,false,true,false,"NOTHING");
-        cabin[0][1] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.",false,true,true,false,"HAVE A BAD TIME");
+        cabin[0][1] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.",false,true,true,false,"HAVE A BAD TIME","NOTHING");
 
         Scanner console = new Scanner(System.in);
         System.out.println("What is your name? ");
@@ -104,7 +104,7 @@ public class PlayGame {
                 System.out.println("What would you like to activate: \n" + ground[player1.getRoomRow()][player1.getRoomColumn()].getActivatableDescription());
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==0){
                     answer = input.nextLine();
-                    if (answer.equalsIgnoreCase("board")){
+                    if (answer.equalsIgnoreCase("board")&& !player1.isHasBoard()){
                         activateLooseBoard(player1, plank);
                     }
                     else{
@@ -124,16 +124,15 @@ public class PlayGame {
                 }
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
                     answer = input.nextLine();
-                    if (answer.equalsIgnoreCase("boards")){
-                        activateBoards(player1);
+                    if (answer.equalsIgnoreCase("boards") && !player1.isBoardsGone()){
+                        activateBoards(ground, player1);
                     }
-                    else if (answer.equalsIgnoreCase("lever")){
-                        activateLever(player1.isBoardsGone(),player1);
+                    else if (answer.equalsIgnoreCase("lever") && !player1.isActivatedLever()){
+                        activateLever(ground, player1.isBoardsGone(),player1);
                     }
                     else{
                         System.out.println("Uh.. What? Try /activate again");
                     }
-
                 }
                 else if (player1.getRoomRow()==1&&player1.getRoomColumn()==0) {
                     answer = input.nextLine();
@@ -143,7 +142,10 @@ public class PlayGame {
 
                 }
                 else if (player1.getRoomRow()==1&&player1.getRoomColumn()==1) {
-
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("gap")&& !player1.isCrossable()){
+                        activateGap(ground, player1);
+                    }
                 }
                 else if (player1.getRoomRow()==1&&player1.getRoomColumn()==2) {
 
@@ -179,7 +181,7 @@ public class PlayGame {
         else if (answer.equalsIgnoreCase("/move west")) {
             if (player1.getFloor()==0){
                 if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionWest())
-                    System.out.println("I don't think you can go that way");
+                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
                 else {
                     player1.setRoomColumn(player1.getRoomColumn() - 1);
                     printGroundMap(player1);
@@ -203,7 +205,7 @@ public class PlayGame {
         else if (answer.equalsIgnoreCase("/move east")) {
             if (player1.getFloor()==0) {
                 if (ground[player1.getRoomRow()][player1.getRoomColumn()].isRestrictionEast())
-                    System.out.println("You try to get through the solid wall but alas... you fail miserably.");
+                    System.out.println("I don't think you can go that way");
                 else {
                     player1.setRoomColumn(player1.getRoomColumn() + 1);
                     printGroundMap(player1);
@@ -324,12 +326,12 @@ public class PlayGame {
         String a = " ";
         String b = " ";
         String c = " ";
-        String d = " ";
-        String e = " ";
-        String f = " ";
-        String g = " ";
-        String h = " ";
-        String i = " ";
+//        String d = " ";
+//        String e = " ";
+//        String f = " ";
+//        String g = " ";
+//        String h = " ";
+//        String i = " ";
 
         if (player1.getRoomRow()==0 && player1.getRoomColumn()==0){
             a="@";
@@ -340,32 +342,32 @@ public class PlayGame {
         else if (player1.getRoomRow()==0 && player1.getRoomColumn()==2){
             c="@";
         }
-        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==0){
-            d="@";
-        }
-        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==1){
-            e="@";
-        }
-        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==2){
-            f="@";
-        }
-        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==0){
-            g="@";
-        }
-        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==1){
-            h="@";
-        }
-        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==2){
-            i="@";
-        }
+//        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==0){
+//            d="@";
+//        }
+//        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==1){
+//            e="@";
+//        }
+//        else if (player1.getRoomRow()==1 && player1.getRoomColumn()==2){
+//            f="@";
+//        }
+//        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==0){
+//            g="@";
+//        }
+//        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==1){
+//            h="@";
+//        }
+//        else if (player1.getRoomRow()==2 && player1.getRoomColumn()==2){
+//            i="@";
+//        }
 
         System.out.println(
                 "-------------" +
                         "\n| "+a+" | "+b+" | "+c+" |" +
-                        "\n---------xxx-" +
-                        "\n| "+d+" | "+e+" X "+f+" |" +
-                        "\n-------------" +
-                        "\n| "+g+" | "+h+" | "+i+" |" +
+//                        "\n---------xxx-" +
+//                        "\n| "+d+" | "+e+" X "+f+" |" +
+//                        "\n-------------" +
+//                        "\n| "+g+" | "+h+" | "+i+" |" +
                         "\n-------------");
     }
 
@@ -384,9 +386,12 @@ public class PlayGame {
 
     }
 
-    public static void activateBoards(Player player1){
+    public static void activateBoards(Room[][] ground, Player player1){
         if(player1.isHasCrowbar()) {
             player1.setBoardsGone(true);
+            System.out.println("You pryed the boards off with your trusty crowbar and SHEER GRIT.\nCongratulations you have average human strength. Or you're maybe a really weak/strong alien.");
+            ground[0][2].setActivatableDescription("LEVER");
+
         }
         else {
             System.out.println("You can't pry these boards off with you bare hands...\nIf only you had something to help.");
@@ -394,14 +399,16 @@ public class PlayGame {
         }
     }
 
-    public static void activateLever(boolean boardsGone, Player player1){
+    public static void activateLever(Room[][] ground, boolean boardsGone, Player player1){
         if (boardsGone) {
             player1.setActivatedLever(true);
-            System.out.println("You flipped the lever and heard a loud noise.");
+            ground[0][2].setActivatableDescription("NOTHING");
+            ground[1][0].setDescription("An open TRAPDOOR lays at your feet as thick cold air blows at your feet.");
+            System.out.println("You flipped the LEVER and heard a loud noise.");
         }
 
         else
-            System.out.println("There are boards in the way...");
+            System.out.println("There are BOARDS in the way...");
 
     }
 
@@ -413,6 +420,9 @@ public class PlayGame {
             player1.setFloor(1);
             printCabinMap(player1);
         }
+        else {
+            System.out.println("The TRAPDOOR is firm shut...");
+        }
 
     }
 
@@ -420,6 +430,9 @@ public class PlayGame {
         if (player1.isHasBoard()) {
             ground[1][1].setRestrictionEast(false);
             System.out.println("You can now use the board to /move EAST!");
+            ground[1][1].setDescription("What once was a gap now is a questionably sturdy walk way!");
+            ground[1][1].setActivatableDescription("NOTHING");
+            player1.setCrossable(true);
         }
         else {
             System.out.println("This gap is rather daunting... If only you had a way to get across");
@@ -432,10 +445,17 @@ public class PlayGame {
         player1.setRoomColumn(0);
         player1.setRoomRow(1);
         player1.setFloor(0);
+        printGroundMap(player1);
         System.out.println("You went to the GROUND floor!");
     }
 
-    public static void activateCourtdoor(Player player1){
+    public static void pickupCrowbar(Player player1, Items crowbar) {
+        player1.setInventory(crowbar);
+        player1.setHasCrowbar(true);
+    }
 
+    public static void pickupScrewdriver(Player player1, Items screwdriver) {
+        player1.setInventory(screwdriver);
+        player1.setHasScrewdriver(true);
     }
 }
