@@ -1,6 +1,6 @@
 # Doot Doot 2: Electric Boogaloo
 ## The Story
-...Huh?! The last thing you remember before passing out and waking up in this suspicious-looking spaceship was eating some good onions. This spaceship looks preeeety intricate, but somehow you manage to send an SOS to your home world after finding out you still have your phone with you. Cool.
+...Huh?! The last thing you remember before passing out and waking up in this suspicious-looking spaceship was eating some good beans. This spaceship looks preeeety intricate, but somehow you manage to send an SOS to your home world after finding out you still have your phone with you. Cool.
 
 While you're here, you might as well try to escape. The ship doesn't have fuel anymore, but there's a lot of damage on the control panel, so you know that you're not the only one aboard.
 
