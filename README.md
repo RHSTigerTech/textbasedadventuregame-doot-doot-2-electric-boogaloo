@@ -4,7 +4,7 @@
 
 While you're here, you might as well try to escape. The ship doesn't have fuel anymore, but there's a lot of damage on the control panel, so you know that you're not the only one aboard.
 
-You walk around finding *anything* that would be useful to your escape. You find out you were right earlier, and the ship is infested with large imps and...cat brutes. Luckily for you, you CAN escape with what they gave you, ~~providing you with~~ hiding crowbars, levers, and a classic screwdriver. I guess it was just a normal Friday afternoon after all—
+You walk around finding *anything* that would be useful to your escape. You find out you were right earlier, and the ship is infested with large imps and, cat brutes, and annoying gaps and trapdoors. Luckily for you, you CAN escape with what they gave you, ~~providing you with~~ hiding crowbars, levers, and a classic screwdriver. I guess it was just a normal Friday afternoon after all—
 
 ```
                                _.--""-._
