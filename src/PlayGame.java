@@ -477,7 +477,7 @@ public class PlayGame {
         if (boardsGone) {
             player1.setActivatedLever(true);
             ground[0][2].setActivatableDescription("NOTHING");
-            ground[1][0].setDescription("An open TRAPDOOR lays at your feet as thick cold air blows at your feet.");
+            ground[1][0].setDescription("An open TRAPDOOR lays on the ground as thick cold air blows at your feet.");
             System.out.println("You flipped the LEVER and heard a loud noise.");
 
             if (player1.isHasScrewdriver()) {
@@ -588,7 +588,7 @@ public class PlayGame {
      */
     public static void pickupKey(Room[][] cabin, Player player1, Items key) {
         player1.setInventory(key);
-        System.out.println("You got the KEY!");
+        System.out.println("You got the KEY! (It's also covered in a substance you don't want to acknowledge");
         player1.setHasKey(true);
         cabin[0][2].setPickupDescription("NOTHING");
         cabin[0][2].setDescription("Nothing remains in this room");
@@ -666,12 +666,22 @@ public class PlayGame {
             }
             System.out.println("Your HEALTH: " + player1.getHealth());
             System.out.println("Enemy HEALTH: " + newIMP.getHealth());
+
             playerTurnDamage = (int)(((player1.getStrength()+player1.getAddedDamage())+(Math.random()*2))/(int)(newIMP.getDefense()-Math.random()*2));
             System.out.println("You did " + playerTurnDamage + " damage!");
+
+            if (playerTurnDamage>9)
+                playerTurnDamage=9;
+
             newIMP.setHealth(newIMP.getHealth()-playerTurnDamage);
             enemyTurnDamage = (int)((newIMP.getStrength()+(Math.random()*2))/(int)(player1.getDefense()-Math.random()*2));
+
+            if (enemyTurnDamage>9)
+                enemyTurnDamage=9;
+
             System.out.println("You took " + enemyTurnDamage + " damage!");
             player1.setHealth(player1.getHealth()-enemyTurnDamage);
+
             System.out.println("Your HEALTH: " + player1.getHealth());
             System.out.println("Enemy HEALTH: " + newIMP.getHealth());
 
