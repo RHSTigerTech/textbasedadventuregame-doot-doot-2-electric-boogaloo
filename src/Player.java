@@ -10,6 +10,10 @@ public class Player extends LivingThing {
     private boolean hasBoard;
     private boolean crossable;
     private boolean winCon;
+    private boolean defeatedSkeleton;
+    private boolean hasKey;
+    private int addedDamage;
+
 
     /**
      * Main constructor of Player.
@@ -31,6 +35,9 @@ public class Player extends LivingThing {
         hasBoard = false;
         crossable = false;
         winCon = false;
+        defeatedSkeleton = false;
+        hasKey = false;
+        addedDamage = 0;
         inventory = new Items[4];
         inventory[0] = new Items("NOTHING", "STILL NOTHING");
         inventory[1] = new Items("NOTHING", "STILL NOTHING");
@@ -222,5 +229,29 @@ public class Player extends LivingThing {
 
     public void setWinCon(boolean winCon) {
         this.winCon = winCon;
+    }
+
+    public boolean isDefeatedSkeleton() {
+        return defeatedSkeleton;
+    }
+
+    public void setDefeatedSkeleton(boolean defeatedSkeleton) {
+        this.defeatedSkeleton = defeatedSkeleton;
+    }
+
+    public int getAddedDamage() {
+        return addedDamage;
+    }
+
+    public boolean isHasKey() {
+        return hasKey;
+    }
+
+    public void setHasKey(boolean hasKey) {
+        this.hasKey = hasKey;
+    }
+
+    public void setAddedDamage(int addedDamage) {
+        this.addedDamage = addedDamage;
     }
 }

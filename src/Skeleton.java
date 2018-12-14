@@ -2,10 +2,8 @@ public class Skeleton extends Enemy {
 
     /**
      * Main constructor of Skeleton
-     * @param dialog The dialog of Skeleton.
      */
-    public Skeleton(String dialog) {
-        super("Skeleton", "Insert description here", 10, 1, 1,
-                dialog);
+    public Skeleton(int health, int strength, int defense) {
+        super("Skeleton", "A TRUE WARRIOR", health, strength, defense, "DOOT DOOT.... DOOT DOOT");
     }
 }

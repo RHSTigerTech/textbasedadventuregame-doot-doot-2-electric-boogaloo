@@ -10,6 +10,7 @@ public class PlayGame {
         Items screwdriver = new Items("Screwdriver", "An old screwdriver. It might be useful");
         Items crowbar = new Items("Rusty Crowbar", "Could be useful.. or harmful.");
         Items plank = new Items("An Old Plank", "Looks sturdy enough... maybe?");
+        Items key = new Items("The Missing Key", "The last componet to your escape!");
 
         Room[][] ground = new Room[2][3];
         Room[][] cabin = new Room[3][3];
@@ -27,7 +28,7 @@ public class PlayGame {
                 "\nSupposedly the imps never deemed the spare crowbar important.",true,true,true,false,"NOTHING", "CROWBAR");
 
         cabin[0][0] = new Room("Trapdoor entrance","A ladder leads back up to the GROUND floor..." +
-                "\nWhy would they call the floor above the CABIN the GROUND floor?",true,false,false,true,"LADDER","NOTHING");
+                "\nWhy would they call the floor above the CABIN the GROUND floor?",true,false,true,true,"LADDER","NOTHING");
 //        cabin[0][1] = new Room("Security Panel","STATUS: LOCKED. PLEASE ENTER 5 DIGIT CODE.",true,false,false,false,"KEY PANEL");
 //        cabin[0][2] = new Room("Right Statue Hall","An adjustable statue stands in your way.",true,true,true,false,"LEFT ARM\nHEAD\nRIGHT ARM");
 //        cabin[1][0] = new Room("Research lab","A lot of strewn notes and novels lay on the floor. \"Space Travel for DUMMIES\", " +
@@ -36,11 +37,11 @@ public class PlayGame {
 //        cabin[1][1] = new Room("Janitor Closet","A lone can of boring \"ANTI-SKELE SPRAY\" lays at your feet. Its" +
 //                "\nmonochrome color could lull any imp to sleep. You almost don't want to take it.",false,true,false,true,"NOTHING");
         cabin[0][2] = new Room("Bathroom","Feces is on the wall, oil on the floor, and your key is in the toilet. You've spent" +
-                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.",true,true,false,true,"FECES", "KEY");
+                "\nthe last 40 minutes for imps to mess with you beyond the grave. On second thought, dying here might not be so bad.",true,true,true,false,"NOTHING", "KEY");
 //        cabin[2][0] = new Room("Left Statue Hall","An adjustable statue stands in your way.",false,false,true,true,"LEFT ARM\nHEAD\nRIGHT ARM");
 //        cabin[2][1] = new Room("Manor Hall","Up on the diner table lays a message. \nIN ORDER FOR YOU TO SOLVE THE RIDDLE OF THE TWO STATUES" +
 //                "\nYOU MUST MAKE THEM HIT THE DAB LIKE WIZ KHALIFA.",false,false,true,false,"NOTHING");
-        cabin[0][1] = new Room("Courtyard","A floating skeleton head looms before you... It looks like you're gonna have a bad time.",false,true,true,false,"HAVE A BAD TIME","NOTHING");
+        cabin[0][1] = new Room("Courtyard","A SKELETON WARRIOR stands before you... It looks like you're gonna HAVE A BAD TIME.",true,true,true,false,"HAVE A BAD TIME","NOTHING");
 
         Scanner console = new Scanner(System.in);
         System.out.println("What is your name? ");
@@ -53,17 +54,14 @@ public class PlayGame {
                 " \nYou are out of fuel and space Imps have pulled all sorts of trickery onto the ship. |OBJECTIVE: Escape the ship.| Use /help for a list of commands");
 
         while (!player1.isWinCon()) {
-            command(ground,cabin,player1, plank, screwdriver, crowbar);
-
-            //winCon = true;
+            command(ground,cabin,player1, plank, screwdriver, crowbar, key);
         }
-
     }
 
     /**
      * Command method for the user input
      */
-    public static void command(Room[][] ground, Room[][] cabin, Player player1, Items plank, Items screwdriver, Items crowbar) {
+    public static void command(Room[][] ground, Room[][] cabin, Player player1, Items plank, Items screwdriver, Items crowbar, Items key) {
         Scanner input = new Scanner(System.in);
         String answer = input.nextLine();
         if (answer.equalsIgnoreCase("/help")) {
@@ -119,10 +117,15 @@ public class PlayGame {
                 }
             }
             else{
-                System.out.println("What would you like to pickup: \n" + cabin[player1.getRoomRow()][player1.getRoomColumn()].getActivatableDescription());
+                System.out.println("What would you like to pickup: \n" + cabin[player1.getRoomRow()][player1.getRoomColumn()].getPickupDescription());
 
                 if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
-
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("key") && !player1.isHasKey()) {
+                        pickupKey(cabin, player1, key);
+                    }
+                    else
+                        System.out.println("Uh.. What? Try /pickup again");
                 }
             }
         }
@@ -195,10 +198,16 @@ public class PlayGame {
 
                 }
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==1) {
-
+                    answer = input.nextLine();
+                    if (answer.equalsIgnoreCase("have a bad time")&&!player1.isDefeatedSkeleton()){
+                        fightSkeleton(player1, cabin);
+                    }
+                    else{
+                        System.out.println("Uh.. What? Try /activate again");
+                    }
                 }
                 else if (player1.getRoomRow()==0&&player1.getRoomColumn()==2) {
-
+                    activateKeyPanel(player1);
                 }
                 else {
                     System.out.println("something went wrong my dude");
@@ -213,7 +222,7 @@ public class PlayGame {
                 else {
                     player1.setRoomColumn(player1.getRoomColumn() - 1);
                     printGroundMap(player1);
-                    //fight(player1);
+                    fight(player1);
                 }
             }
             else if(player1.getFloor()==1) {
@@ -238,7 +247,7 @@ public class PlayGame {
                 else {
                     player1.setRoomColumn(player1.getRoomColumn() + 1);
                     printGroundMap(player1);
-                    //fight(player1);
+                    fight(player1);
                 }
             }
             else if (player1.getFloor()==1) {
@@ -261,7 +270,7 @@ public class PlayGame {
                 else {
                     player1.setRoomRow(player1.getRoomRow() - 1);
                     printGroundMap(player1);
-                    //fight(player1);
+                    fight(player1);
                 }
             }
             else if (player1.getFloor()==1) {
@@ -283,7 +292,7 @@ public class PlayGame {
                 else {
                     player1.setRoomRow(player1.getRoomRow() + 1);
                     printGroundMap(player1);
-                   //fight(player1);
+                   fight(player1);
                 }
             }
             else if (player1.getFloor()==1) {
@@ -422,7 +431,9 @@ public class PlayGame {
             player1.setInventory(plank);
             player1.setHasBoard(true);
             ground[0][0].setActivatableDescription("NOTHING");
+            ground[0][0].setDescription("You got a plank now... Cool... There was nothing behind the plank... Just more wall...");
         }
+        player1.setAddedDamage(4);
     }
 
     /**
@@ -430,7 +441,12 @@ public class PlayGame {
      * @param player1 The current player object
      */
     public static void activateKeyPanel(Player player1) {
-
+        if (player1.isHasKey()) {
+            System.out.println("You plugged the key and got rescued... Thank you for playing!");
+            player1.setWinCon(true);
+        }
+        else
+            System.out.println("You still need the key!");
     }
 
     /**
@@ -540,7 +556,7 @@ public class PlayGame {
         System.out.println("You got the CROWBAR!");
         ground[1][2].setPickupDescription("NOTHING");
         ground[1][2].setDescription("This room has been SACKED");
-
+        player1.setAddedDamage(6);
 
     }
 
@@ -561,20 +577,32 @@ public class PlayGame {
         else {
             ground[0][2].setDescription("A LEVER that has been hastily boarded up remains");
         }
+        player1.setAddedDamage(2);
+    }
+
+    public static void pickupKey(Room[][] cabin, Player player1, Items key) {
+        player1.setInventory(key);
+        System.out.println("You got the KEY!");
+        player1.setHasKey(true);
+        cabin[0][2].setPickupDescription("NOTHING");
+        cabin[0][2].setDescription("Nothing remains in this room");
     }
 
     public static void fight(Player player1){
-        if (Math.random()<0.21){
-            if (Math.random()<0.51){
+        if (Math.random()<0.34){
+            if (Math.random()>0.51){
                 fightImp(player1);
             }
             else
                 fightBrute(player1);
         }
-
     }
 
     public static void fightImp(Player player1){
+        Scanner console = new Scanner(System.in);
+        String answer = "";
+        int playerTurnDamage = 0;
+        int enemyTurnDamage = 0;
         System.out.println(
                 "                                    ,\n" +
                         "       ,  .   (          )          -.\\ |\n" +
@@ -608,17 +636,268 @@ public class PlayGame {
 
         );
         System.out.println("An IMP appears before you!");
-        Imp newIMP = new Imp("Hee... Hee... I used your toothbrush for OBSCENE Things!!..",(int)(Math.random()*4+4),(int)(Math.random()*2+2),(int)(Math.random()*2+2));
+        Imp newIMP = new Imp((int)(Math.random()*4+4),(int)(Math.random()*2+2),(int)(Math.random()*2+2));
         while (newIMP.getHealth()>0){
+            answer = "";
             if(player1.getHealth()<=0){
                 System.out.println("You died!");
                 System.exit(0);
             }
+            while (!answer.equalsIgnoreCase("/attack")) {
+                System.out.println("Quick! Use /Attack to defeat this ENEMY!");
+                answer = console.nextLine();
+                if (!answer.equalsIgnoreCase("/attack")) {
+                    System.out.println("Uh.. What? Try /attack again");
+                }
+            }
+            System.out.println("Your HEALTH: " + player1.getHealth());
+            System.out.println("Enemy HEALTH: " + newIMP.getHealth());
+            playerTurnDamage = (int)(((player1.getStrength()+player1.getAddedDamage())+(Math.random()*2))/(int)(newIMP.getDefense()-Math.random()*2));
+            System.out.println("You did " + playerTurnDamage + " damage!");
+            newIMP.setHealth(newIMP.getHealth()-playerTurnDamage);
+            enemyTurnDamage = (int)((newIMP.getStrength()+(Math.random()*2))/(int)(player1.getDefense()-Math.random()*2));
+            System.out.println("You took " + enemyTurnDamage + " damage!");
+            player1.setHealth(player1.getHealth()-enemyTurnDamage);
+            System.out.println("Your HEALTH: " + player1.getHealth());
+            System.out.println("Enemy HEALTH: " + newIMP.getHealth());
+
+            System.out.println(
+                    "                                    ,\n" +
+                            "       ,  .   (          )          -.\\ |\n" +
+                            "       | / .- |\\        /|         _  \\'/\n" +
+                            "        \\'/   | \\.-\"\"-./ |          \\_) ;-'\n" +
+                            "     `'-; (_/ ;   _  _   ;           ) /\n" +
+                            "         \\ (   \\ (.\\/.) /    .-.    / |\n" +
+                            "          \\ \\   \\ \\/\\/ /-._.'   \\   | |\n" +
+                            "           \\ \\   \\ .. /_         \\  | |\n" +
+                            "            \\ \\   |  |__)     |\\  \\ | |\n" +
+                            "             \\ `\"`|==|_       | \\  \\| |\n" +
+                            "              \\,-'|==| \\      |  \\    |\n" +
+                            "                   \\/   '.    /   `\\ /\n" +
+                            "                          |   |     `   ,\n" +
+                            "                          |   |         )\\\n" +
+                            "                __.....__/    |        /  \\\n" +
+                            "              /`              \\        `//`\n" +
+                            "              |  \\`-....-'\\    `-.____.'/\n" +
+                            "              |  |        /   /`\"-----'`\n" +
+                            "              |  |        |  |\n" +
+                            "              | /         |  |\n" +
+                            "       .------' \\         /  /\n" +
+                            "      (((--------'        \\  |\n" +
+                            "                           | \\\n" +
+                            "                           | |\n" +
+                            "                           | |\n" +
+                            "                           | /\n" +
+                            "                          /  )\n" +
+                            "                         /   |\n" +
+                            "                        (-(-('"
+
+            );
+            System.out.println(newIMP.getDialog());
+
 
         }
+        System.out.println("\n\n\n\n\n\n\n\n" +
+                "You defeated the IMP!");
+        player1.setHealth(11);
+    }
 
-    }
     public static void fightBrute(Player player1){
-        System.out.println("you got a bresfsf");
+        Scanner console = new Scanner(System.in);
+        String answer = "";
+        int playerTurnDamage = 0;
+        int enemyTurnDamage = 0;
+        System.out.println("\n" +
+                "      /)   /)       \n" +
+                "     ( ｡•ㅅ•｡ )　　  \n" +
+                "　＿ノ ヽ　ノ ＼＿   \n" +
+                "`/　`/ ⌒Ｙ⌒ Ｙ　ヽ  \n" +
+                "( 　(三ヽ人　 /　　|  \n" +
+                "|　ﾉ⌒＼ ￣￣ヽ　 ノ  \n" +
+                "ヽ＿＿＿＞､＿＿_／    \n" +
+                "　　 ｜( 王 ﾉ〈      \n" +
+                "　　 /ﾐ`ー―彡ヽ      ");
+        System.out.println("A BRUTE appears!");
+        Brute newBRUTE = new Brute((int)(Math.random()*4+1),(int)(Math.random()*8+2),(int)(Math.random()*4+1));
+        while (newBRUTE.getHealth()>0){
+            answer = "";
+            if(player1.getHealth()<=0){
+                System.out.println("You died!");
+                System.exit(0);
+            }
+            while (!answer.equalsIgnoreCase("/attack")) {
+                System.out.println("Quick! Use /Attack to defeat this ENEMY!");
+                answer = console.nextLine();
+                if (!answer.equalsIgnoreCase("/attack")) {
+                    System.out.println("Uh.. What? Try /attack again");
+                }
+            }
+            System.out.println("Your HEALTH: " + player1.getHealth());
+            System.out.println("Enemy HEALTH: " + newBRUTE.getHealth());
+
+            playerTurnDamage = (int)(((player1.getStrength()+player1.getAddedDamage())+(Math.random()*2))/(int)(newBRUTE.getDefense()-Math.random()*2));
+            if (playerTurnDamage>9)
+                playerTurnDamage=9;
+            System.out.println("You did " + playerTurnDamage + " damage!");
+            newBRUTE.setHealth(newBRUTE.getHealth()-playerTurnDamage);
+
+            enemyTurnDamage = (int)((newBRUTE.getStrength()+(Math.random()*2))/(int)(player1.getDefense()-Math.random()*2));
+            if (enemyTurnDamage>9)
+                enemyTurnDamage=9;
+            System.out.println("You took " + enemyTurnDamage + " damage!");
+            player1.setHealth(player1.getHealth()-enemyTurnDamage);
+
+            System.out.println("Your HEALTH: " + player1.getHealth());
+            System.out.println("Enemy HEALTH: " + newBRUTE.getHealth());
+
+            System.out.println("\n" +
+                    "      /)   /)       \n" +
+                    "     ( ｡•ㅅ•｡ )　　  \n" +
+                    "　＿ノ ヽ　ノ ＼＿   \n" +
+                    "`/　`/ ⌒Ｙ⌒ Ｙ　ヽ  \n" +
+                    "( 　(三ヽ人　 /　　|  \n" +
+                    "|　ﾉ⌒＼ ￣￣ヽ　 ノ  \n" +
+                    "ヽ＿＿＿＞､＿＿_／    \n" +
+                    "　　 ｜( 王 ﾉ〈      \n" +
+                    "　　 /ﾐ`ー―彡ヽ      ");
+            System.out.println(newBRUTE.getDialog());
+
+
+        }
+        System.out.println("\n\n\n\n\n\n\n\n" +
+                "You defeated the BRUTE!");
+        player1.setHealth(11);
     }
+
+    public static void fightSkeleton(Player player1, Room[][] cabin){
+        Scanner console = new Scanner(System.in);
+        String answer = "";
+        int playerTurnDamage = 0;
+        int enemyTurnDamage = 0;
+        System.out.println("" +
+                "                             _.--\"\"-._\n" +
+                "  .                         .\"         \".\n" +
+                " / \\    ,^.         /(     Y             |      )\\\n" +
+                "/   `---. |--'\\    (  \\__..'--   -   -- -'\"\"-.-'  )\n" +
+                "|        :|    `>   '.     l_..-------.._l      .'\n" +
+                "|      __l;__ .'      \"-.__.||_.-'v'-._||`\"----\"\n" +
+                " \\  .-' | |  `              l._       _.'\n" +
+                "  \\/    | |                   l`^^'^^'j\n" +
+                "        | |                _   \\_____/     _\n" +
+                "        j |               l `--__)-'(__.--' |\n" +
+                "        | |               | /`---``-----'\"1 |  ,-----.\n" +
+                "        | |               )/  `--' '---'   \\'-'  ___  `-.\n" +
+                "        | |              //  `-'  '`----'  /  ,-'   I`.  \\\n" +
+                "      _ L |_            //  `-.-.'`-----' /  /  |   |  `. \\\n" +
+                "     '._' / \\         _/(   `/   )- ---' ;  /__.J   L.__.\\ :\n" +
+                "      `._;/7(-.......'  /        ) (     |  |            | |\n" +
+                "      `._;l _'--------_/        )-'/     :  |___.    _._./ ;\n" +
+                "        | |                 .__ )-'\\  __  \\  \\  I   1   / /\n" +
+                "        `-'                /   `-\\-(-'   \\ \\  `.|   | ,' /\n" +
+                "                           \\__  `-'    __/  `-. `---'',-'\n" +
+                "                              )-._.-- (        `-----'\n" +
+                "                             )(  l\\ o ('..-.\n" +
+                "                       _..--' _'-' '--'.-. |\n" +
+                "                __,,-'' _,,-''            \\ \\\n" +
+                "               f'. _,,-'                   \\ \\\n" +
+                "              ()--  |                       \\ \\\n" +
+                "                \\.  |                       /  \\\n" +
+                "                  \\ \\                      |._  |\n" +
+                "                   \\ \\                     |  ()|\n" +
+                "                    \\ \\                     \\  /\n" +
+                "                     ) `-.                   | |\n" +
+                "                    // .__)                  | |\n" +
+                "                 _.//7'                      | |\n" +
+                "               '---'                         j_| `\n" +
+                "                                            (| |\n" +
+                "                                             |  \\\n" +
+                "                                             |lllj\n" +
+                "                                             |||||  ");
+        System.out.println("A TRUE WARRIOR block your path!");
+        Skeleton newSkeleton = new Skeleton((int)(Math.random()*16+5),(int)(Math.random()*4+2),(int)(Math.random()*4+1));
+        while (newSkeleton.getHealth()>0){
+            answer = "";
+            if(player1.getHealth()<=0){
+                System.out.println("You died!");
+                System.exit(0);
+            }
+            while (!answer.equalsIgnoreCase("/attack")) {
+                System.out.println("Quick! Use /Attack to defeat this ENEMY!");
+                answer = console.nextLine();
+                if (!answer.equalsIgnoreCase("/attack")) {
+                    System.out.println("Uh.. What? Try /attack again");
+                }
+            }
+            System.out.println("Your HEALTH: " + player1.getHealth());
+            System.out.println("Enemy HEALTH: " + newSkeleton.getHealth());
+
+            playerTurnDamage = (int)(((player1.getStrength()+player1.getAddedDamage())+(Math.random()*2))/(int)(newSkeleton.getDefense()-Math.random()*2));
+            if (playerTurnDamage>9)
+                playerTurnDamage=9;
+            System.out.println("You did " + playerTurnDamage + " damage!");
+            newSkeleton.setHealth(newSkeleton.getHealth()-playerTurnDamage);
+
+            enemyTurnDamage = (int)((newSkeleton.getStrength()+(Math.random()*2))/(int)(player1.getDefense()-Math.random()*2));
+            if (enemyTurnDamage>9)
+                enemyTurnDamage=9;
+            System.out.println("You took " + enemyTurnDamage + " damage!");
+            player1.setHealth(player1.getHealth()-enemyTurnDamage);
+
+            System.out.println("Your HEALTH: " + player1.getHealth());
+            System.out.println("Enemy HEALTH: " + newSkeleton.getHealth());
+
+            System.out.println("" +
+                    "                             _.--\"\"-._\n" +
+                    "  .                         .\"         \".\n" +
+                    " / \\    ,^.         /(     Y             |      )\\\n" +
+                    "/   `---. |--'\\    (  \\__..'--   -   -- -'\"\"-.-'  )\n" +
+                    "|        :|    `>   '.     l_..-------.._l      .'\n" +
+                    "|      __l;__ .'      \"-.__.||_.-'v'-._||`\"----\"\n" +
+                    " \\  .-' | |  `              l._       _.'\n" +
+                    "  \\/    | |                   l`^^'^^'j\n" +
+                    "        | |                _   \\_____/     _\n" +
+                    "        j |               l `--__)-'(__.--' |\n" +
+                    "        | |               | /`---``-----'\"1 |  ,-----.\n" +
+                    "        | |               )/  `--' '---'   \\'-'  ___  `-.\n" +
+                    "        | |              //  `-'  '`----'  /  ,-'   I`.  \\\n" +
+                    "      _ L |_            //  `-.-.'`-----' /  /  |   |  `. \\\n" +
+                    "     '._' / \\         _/(   `/   )- ---' ;  /__.J   L.__.\\ :\n" +
+                    "      `._;/7(-.......'  /        ) (     |  |            | |\n" +
+                    "      `._;l _'--------_/        )-'/     :  |___.    _._./ ;\n" +
+                    "        | |                 .__ )-'\\  __  \\  \\  I   1   / /\n" +
+                    "        `-'                /   `-\\-(-'   \\ \\  `.|   | ,' /\n" +
+                    "                           \\__  `-'    __/  `-. `---'',-'\n" +
+                    "                              )-._.-- (        `-----'\n" +
+                    "                             )(  l\\ o ('..-.\n" +
+                    "                       _..--' _'-' '--'.-. |\n" +
+                    "                __,,-'' _,,-''            \\ \\\n" +
+                    "               f'. _,,-'                   \\ \\\n" +
+                    "              ()--  |                       \\ \\\n" +
+                    "                \\.  |                       /  \\\n" +
+                    "                  \\ \\                      |._  |\n" +
+                    "                   \\ \\                     |  ()|\n" +
+                    "                    \\ \\                     \\  /\n" +
+                    "                     ) `-.                   | |\n" +
+                    "                    // .__)                  | |\n" +
+                    "                 _.//7'                      | |\n" +
+                    "               '---'                         j_| `\n" +
+                    "                                            (| |\n" +
+                    "                                             |  \\\n" +
+                    "                                             |lllj\n" +
+                    "                                             |||||  ");
+            System.out.println(newSkeleton.getDialog());
+
+
+        }
+        System.out.println("\n\n\n\n\n\n\n\n" +
+                "You defeated the SKELETON!");
+        player1.setHealth(11);
+        cabin[0][1].setActivatableDescription("NOTHING");
+        cabin[0][1].setDescription("A pile of bones lay at your feet. You feel victorious.");
+        player1.setDefeatedSkeleton(true);
+        cabin[0][1].setRestrictionEast(false);
+        System.out.println("You can now proceed with /move EAST");
+    }
+
+
 }
