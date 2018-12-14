@@ -580,6 +580,12 @@ public class PlayGame {
         player1.setAddedDamage(2);
     }
 
+    /**
+     * Pickup method for the key
+     * @param cabin The cabin state of Room
+     * @param player1 The current player object
+     * @param key The key Item
+     */
     public static void pickupKey(Room[][] cabin, Player player1, Items key) {
         player1.setInventory(key);
         System.out.println("You got the KEY!");
@@ -588,6 +594,10 @@ public class PlayGame {
         cabin[0][2].setDescription("Nothing remains in this room");
     }
 
+    /**
+     * Fight encounter method
+     * @param player1 The current player object
+     */
     public static void fight(Player player1){
         if (Math.random()<0.34){
             if (Math.random()>0.51){
@@ -598,6 +608,10 @@ public class PlayGame {
         }
     }
 
+    /**
+     * Fight method for the Imp
+     * @param player1 The current player object
+     */
     public static void fightImp(Player player1){
         Scanner console = new Scanner(System.in);
         String answer = "";
@@ -694,14 +708,16 @@ public class PlayGame {
 
             );
             System.out.println(newIMP.getDialog());
-
-
         }
         System.out.println("\n\n\n\n\n\n\n\n" +
                 "You defeated the IMP!");
         player1.setHealth(11);
     }
 
+    /**
+     * Fight method for the Brute
+     * @param player1 The current player object
+     */
     public static void fightBrute(Player player1){
         Scanner console = new Scanner(System.in);
         String answer = "";
@@ -769,6 +785,11 @@ public class PlayGame {
         player1.setHealth(11);
     }
 
+    /**
+     * Fight method for the skeleton
+     * @param player1 The current player object
+     * @param cabin The cabin state of Room
+     */
     public static void fightSkeleton(Player player1, Room[][] cabin){
         Scanner console = new Scanner(System.in);
         String answer = "";
@@ -887,7 +908,6 @@ public class PlayGame {
                     "                                             |||||  ");
             System.out.println(newSkeleton.getDialog());
 
-
         }
         System.out.println("\n\n\n\n\n\n\n\n" +
                 "You defeated the SKELETON!");
@@ -898,6 +918,4 @@ public class PlayGame {
         cabin[0][1].setRestrictionEast(false);
         System.out.println("You can now proceed with /move EAST");
     }
-
-
 }

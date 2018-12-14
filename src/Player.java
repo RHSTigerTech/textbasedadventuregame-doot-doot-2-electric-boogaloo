@@ -14,7 +14,6 @@ public class Player extends LivingThing {
     private boolean hasKey;
     private int addedDamage;
 
-
     /**
      * Main constructor of Player.
      * @param name Name of the player.
@@ -223,34 +222,66 @@ public class Player extends LivingThing {
         this.crossable = crossable;
     }
 
+    /**
+     * Getter method for win condition
+     * @return Is the win condition met?
+     */
     public boolean isWinCon() {
         return winCon;
     }
 
+    /**
+     * Setter method for win condition
+     * @param winCon The new state of winCon
+     */
     public void setWinCon(boolean winCon) {
         this.winCon = winCon;
     }
 
+    /**
+     * Getter method for the skeleton's state
+     * @return Is the skeleton defeated?
+     */
     public boolean isDefeatedSkeleton() {
         return defeatedSkeleton;
     }
 
+    /**
+     * Setter method for the skeleton's state
+     * @param defeatedSkeleton The new state of the player defeating skeleton
+     */
     public void setDefeatedSkeleton(boolean defeatedSkeleton) {
         this.defeatedSkeleton = defeatedSkeleton;
     }
 
+    /**
+     * Getter method for additive damage
+     * @return The added damage received
+     */
     public int getAddedDamage() {
         return addedDamage;
     }
 
+    /**
+     * Getter method for the player having the key
+     * @return Does the player have a key?
+     */
     public boolean isHasKey() {
         return hasKey;
     }
 
+    /**
+     * Setter method for the player having the key
+     * @param hasKey The new state of the player's key
+     */
     public void setHasKey(boolean hasKey) {
         this.hasKey = hasKey;
     }
 
+    /**
+     * Setter method for added damage
+     * @param addedDamage New added damage received
+     */
     public void setAddedDamage(int addedDamage) {
         this.addedDamage = addedDamage;
     }
