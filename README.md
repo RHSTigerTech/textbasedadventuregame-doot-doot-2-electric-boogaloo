@@ -1,6 +1,6 @@
 # Doot Doot 2: Electric Boogaloo
 
-hi 3rd period -pie
+hi 3rd period fall 2019 -pie
 
 ## The Story
 ...Huh?! The last thing you remember before passing out and waking up in this suspicious-looking spaceship was eating some good beans. This spaceship looks preeeety intricate, but somehow you manage to send an SOS to your home world after finding out you still have your phone with you. Cool.
